@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Pembelajaran: Menyisipkan Gambar & Atribut Visual pada Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tab-btn.active {
+            border-bottom-color: #2563eb;
+            color: #2563eb;
+            background-color: #eff6ff;
+            font-weight: 600;
+        }
+        pre code {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+        }
+        .image-map-container {
+            position: relative;
+            display: inline-block;
+        }
+        .hotspot {
+            position: absolute;
+            border: 2px dashed #f59e0b;
+            background-color: rgba(245, 158, 11, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .hotspot:hover {
+            background-color: rgba(239, 68, 68, 0.5);
+            border-color: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Header & Alokasi Waktu -->
+    <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <span class="inline-block bg-blue-500/30 text-blue-100 text-xs px-3 py-1 rounded-full font-medium mb-2 border border-blue-400/30">
+                        <i class="fa-solid fa-graduation-cap mr-1"></i> Guru Mapel : Akhmad Noor Effendi, S.Kom
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Menyisipkan Objek Gambar & Atribut Visual Web</h1>
+                    <p class="text-blue-100 text-sm mt-1">Panduan Lengkap Teori, Tag HTML, Atribut CSS Visual, Demo Interaktif & Evaluasi</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/20 text-xs sm:text-sm">
+                    <div class="font-semibold text-amber-300 flex items-center gap-1.5 mb-1">
+                        <i class="fa-solid fa-clock"></i> Alokasi Waktu: 2x Pertemuan (8 JP / 360 Menit)
+                    </div>
+                    <div class="text-slate-200">
+                        • Pertemuan 1 (4 JP / 180 mnt): Tag Dasar, Path, Dimensi, & Format<br>
+                        • Pertemuan 2 (4 JP / 180 mnt): Semantik, Responsif, Map & Styling CSS
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex overflow-x-auto no-scrollbar space-x-1 sm:space-x-4" id="tab-buttons">
+                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-4 py-3.5 border-b-2 border-transparent text-slate-600 hover:text-blue-600 whitespace-nowrap text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-book"></i> Tab 1: Pengertian & Tag Lengkap
+                </button>
+                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn px-4 py-3.5 border-b-2 border-transparent text-slate-600 hover:text-blue-600 whitespace-nowrap text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-code"></i> Tab 2: Contoh Pengerjaan Per Tag
+                </button>
+                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn px-4 py-3.5 border-b-2 border-transparent text-slate-600 hover:text-blue-600 whitespace-nowrap text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-cubes-stacked"></i> Tab 3: Proyek Terpadu & Interaktif
+                </button>
+                <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn px-4 py-3.5 border-b-2 border-transparent text-slate-600 hover:text-blue-600 whitespace-nowrap text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i> Tab 4: Evaluasi & Studi Kasus Siswa
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: PENGERTIAN & PENJELASAN LENGKAP -->
+        <section id="tab1" class="tab-content block space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                        <span class="p-2 bg-blue-100 text-blue-700 rounded-lg text-lg"><i class="fa-solid fa-book-open"></i></span>
+                        Konsep Dasar Gambar dalam Web Development
+                    </h2>
+                    <p class="text-slate-600 mt-2 text-justify">
+                        Gambar adalah salah satu komponen multimedia terpenting pada halaman web. Tanpa gambar, sebuah situs web akan terasa kaku dan membosankan. Gambar tidak hanya berfungsi sebagai elemen hiasan (dekoratif), tetapi juga sebagai penyampaian informasi visual, identitas merek (branding), daya tarik UX (User Experience), serta memperkuat struktur konten.
+                    </p>
+                </div>
+
+                <!-- Pembagian Pertemuan -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-blue-50/70 border border-blue-200 p-5 rounded-xl">
+                        <h3 class="font-bold text-blue-900 text-lg flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-calendar-day text-blue-600"></i> Agenda Pertemuan 1 (4 JP / 180 Menit)
+                        </h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-slate-700">
+                            <li>Memahami prinsip kerja HTTP request pada elemen media gambar.</li>
+                            <li>Menguasai Tag utama <code class="bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">&lt;img&gt;</code> dan Atribut Wajibnya (<code class="text-blue-800">src</code>, <code class="text-blue-800">alt</code>, <code class="text-blue-800">title</code>).</li>
+                            <li>Membedakan Jalur Berkas (Relative vs Absolute Path).</li>
+                            <li>Mengatur Dimensi Gambar (<code class="text-blue-800">width</code> & <code class="text-blue-800">height</code>) & Pengaruhnya terhadap CLS (Cumulative Layout Shift).</li>
+                            <li>Mengenal Format Gambar Web Modern (JPEG, PNG, GIF, SVG, WebP, AVIF).</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-indigo-50/70 border border-indigo-200 p-5 rounded-xl">
+                        <h3 class="font-bold text-indigo-900 text-lg flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-calendar-day text-indigo-600"></i> Agenda Pertemuan 2 (4 JP / 180 Menit)
+                        </h3>
+                        <ul class="list-disc list-inside space-y-1.5 text-sm text-slate-700">
+                            <li>Menggunakan Tag Semantik HTML5: <code class="bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded">&lt;figure&gt;</code> & <code class="text-indigo-800">&lt;figcaption&gt;</code>.</li>
+                            <li>Penyajian Gambar Responsif dengan Tag <code class="bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded">&lt;picture&gt;</code> & <code class="text-indigo-800">&lt;source&gt;</code>.</li>
+                            <li>Membuat Area Gambar Interaktif (Image Mapping: <code class="text-indigo-800">&lt;map&gt;</code> & <code class="text-indigo-800">&lt;area&gt;</code>).</li>
+                            <li>Manipulasi Visual CSS: <code class="text-indigo-800">object-fit</code>, <code class="text-indigo-800">border-radius</code>, <code class="text-indigo-800">box-shadow</code>, <code class="text-indigo-800">filter</code>, dan efek Hover.</li>
+                            <li>Optimasi Performa: Atribut <code class="text-indigo-800">loading="lazy"</code>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Penjelasan Tag & Atribut Lengkap -->
+                <h3 class="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                    Penjelasan Detail Tag HTML & Atribut Gambar
+                </h3>
+
+                <div class="space-y-6">
+                    <!-- 1. Tag img -->
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition-all">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2.5 py-1 bg-blue-600 text-white font-mono text-xs font-bold rounded">&lt;img&gt;</span>
+                            <h4 class="font-bold text-slate-800">Tag Utama Gambar (Void Element / Self-Closing)</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 text-justify mb-2">
+                            Tag <code class="text-blue-600">&lt;img&gt;</code> digunakan untuk menyisipkan gambar ke dalam dokumen HTML. Tag ini bersifat <strong>Inline Element</strong> (berada sejajar dengan teks) dan merupakan <strong>Void Element</strong> (tidak memiliki penutup seperti <code class="text-slate-500">&lt;/img&gt;</code>). Tag ini menyisipkan gambar secara tidak langsung dengan mereferensikan sumber berkas gambar.
+                        </p>
+                    </div>
+
+                    <!-- Table Atribut Utama -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left border-collapse border border-slate-200 rounded-lg overflow-hidden">
+                            <thead class="bg-slate-800 text-white">
+                                <tr>
+                                    <th class="p-3 border border-slate-700">Nama Atribut / Tag</th>
+                                    <th class="p-3 border border-slate-700">Jenis / Nilai</th>
+                                    <th class="p-3 border border-slate-700">Fungsi & Detail Operasional</th>
+                                    <th class="p-3 border border-slate-700">Relevansi & Best Practice</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-blue-700">src (source)</td>
+                                    <td class="p-3 text-xs text-slate-600">URL / File Path</td>
+                                    <td class="p-3">Menentukan jalur alamat berkas gambar. Bisa berupa <em>Relative Path</em> (lokal) atau <em>Absolute Path</em> (URL web lain).</td>
+                                    <td class="p-3 text-xs text-slate-600"><strong>Wajib Ada.</strong> Jika path salah, gambar akan rusak (broken image).</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-blue-700">alt (alternate text)</td>
+                                    <td class="p-3 text-xs text-slate-600">String / Teks deskriptif</td>
+                                    <td class="p-3">Teks pengganti jika gambar gagal dimuat. Sangat krusial untuk <em>Screen Reader</em> (aksesibilitas difabel netra) dan Web Crawler (SEO).</td>
+                                    <td class="p-3 text-xs text-slate-600"><strong>Sangat Wajib untuk Aksesibilitas & SEO.</strong> Jangan dikosongkan kecuali gambar murni dekoratif (<code class="bg-slate-100 p-0.5 rounded">alt=""</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-blue-700">title</td>
+                                    <td class="p-3 text-xs text-slate-600">String / Teks singkat</td>
+                                    <td class="p-3">Menampilkan balon petunjuk (<em>tooltip</em>) saat kursor mouse diuji usap (hover) di atas gambar.</td>
+                                    <td class="p-3 text-xs text-slate-600">Memberikan informasi tambahan non-krusial bagi pengguna desktop.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-blue-700">width & height</td>
+                                    <td class="p-3 text-xs text-slate-600">Pixel (angka)</td>
+                                    <td class="p-3">Menentukan lebar dan tinggi gambar dalam satuan piksel pada HTML. Menyiapkan ruang sebelum gambar termuat sempurna.</td>
+                                    <td class="p-3 text-xs text-slate-600">Mencegah <strong>Cumulative Layout Shift (CLS)</strong> agar konten web tidak melompat-lompat saat memuat.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-blue-700">loading</td>
+                                    <td class="p-3 text-xs text-slate-600"><code class="text-indigo-600">"lazy"</code> | <code class="text-indigo-600">"eager"</code></td>
+                                    <td class="p-3">Pengaturan pemuatan gambar. <code class="text-indigo-600">lazy</code> menunda pemuatan gambar sampai mendekati area layar (viewport).</td>
+                                    <td class="p-3 text-xs text-slate-600">Meningkatkan kecepatan muat halaman web (Page Speed) secara drastis.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-indigo-700">&lt;figure&gt; & &lt;figcaption&gt;</td>
+                                    <td class="p-3 text-xs text-slate-600">Semantic Container Tag</td>
+                                    <td class="p-3"><code class="text-indigo-700">&lt;figure&gt;</code> membungkus gambar beserta penjelasannya, sedangkan <code class="text-indigo-700">&lt;figcaption&gt;</code> memberikan keterangan/caption gambar.</td>
+                                    <td class="p-3 text-xs text-slate-600">Menjadikan struktur dokumen HTML lebih rapi, terstruktur, dan dipahami oleh mesin pencari.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-indigo-700">&lt;picture&gt; & &lt;source&gt;</td>
+                                    <td class="p-3 text-xs text-slate-600">Responsive Image Tag</td>
+                                    <td class="p-3">Wadah untuk menyajikan berbagai variasi gambar berdasarkan ukuran layar (<code class="text-indigo-600">media query</code>) atau dukungan format modern.</td>
+                                    <td class="p-3 text-xs text-slate-600">Penting untuk <strong>Responsive Web Design (RWD)</strong> & optimasi hemat kuota pengguna mobile.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono font-bold text-indigo-700">&lt;map&gt; & &lt;area&gt;</td>
+                                    <td class="p-3 text-xs text-slate-600">Image Mapping</td>
+                                    <td class="p-3">Membuat wilayah klik interaktif pada gambar tunggal menggunakan koordinat posisi (<code class="text-indigo-600">rect</code>, <code class="text-indigo-600">circle</code>, <code class="text-indigo-600">poly</code>).</td>
+                                    <td class="p-3 text-xs text-slate-600">Digunakan untuk denah lokasi, struktur organ tubuh, diagram interaktif, atau peta wilayah.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Panduan Format Gambar Web -->
+                    <div class="mt-8 border-t border-slate-200 pt-6">
+                        <h4 class="text-lg font-bold text-slate-900 mb-4">Perbandingan Format Gambar Web Modern</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold px-2 py-0.5 bg-amber-100 text-amber-800 rounded">JPG / JPEG</span>
+                                <h5 class="font-bold text-slate-800 mt-2 text-sm">Fotografi Realistis</h5>
+                                <p class="text-xs text-slate-600 mt-1">Kompresi <em>lossy</em>. Cocok untuk foto alam/manusia dengan gradasi warna tinggi. Tidak mendukung latar transparan.</p>
+                            </div>
+                            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold px-2 py-0.5 bg-blue-100 text-blue-800 rounded">PNG</span>
+                                <h5 class="font-bold text-slate-800 mt-2 text-sm">Transparansi & Grafik</h5>
+                                <p class="text-xs text-slate-600 mt-1">Kompresi <em>lossless</em>. Sangat baik untuk logo, ikon, diagram, dan gambar dengan Latar Belakang Transparan (Alpha Channel).</p>
+                            </div>
+                            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded">SVG</span>
+                                <h5 class="font-bold text-slate-800 mt-2 text-sm">Vektor Bebas Pecah</h5>
+                                <p class="text-xs text-slate-600 mt-1">Format berbasis XML. Tidak akan pernah pecah meski di-zoom pada layar Retina/4K. Ukuran berkas sangat kecil.</p>
+                            </div>
+                            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="text-xs font-bold px-2 py-0.5 bg-purple-100 text-purple-800 rounded">WebP / AVIF</span>
+                                <h5 class="font-bold text-slate-800 mt-2 text-sm">Format Web Masa Depan</h5>
+                                <p class="text-xs text-slate-600 mt-1">Format kompresi sangat tinggi buatan Google/AOMedia. Ukuran berkas 30-50% lebih kecil dibanding PNG/JPG tanpa mengurangi kualitas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: CONTOH PENGERJAAN Masing-Masing Tag -->
+        <section id="tab2" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                        <span class="p-2 bg-emerald-100 text-emerald-700 rounded-lg text-lg"><i class="fa-solid fa-code"></i></span>
+                        Contoh Penerapan Implementasi Kode Per Tag & Atribut
+                    </h2>
+                    <p class="text-slate-600 mt-1">Pelajari sintaks spesifik dan struktur kode HTML beserta penjelasannya untuk setiap kasus penggunaan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-8">
+                    
+                    <!-- Item 1 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <span class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-1 mr-2 text-blue-600"></i>Tag &lt;img&gt; Dasar dengan Atribut Wajib (src, alt, title)</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded">Pertemuan 1</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 mb-2 font-semibold">KODE HTML:</p>
+                                <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;!-- Menggunakan Relative Path --&gt;
+&lt;img src="images/pemandangan.jpg" 
+     alt="Pemandangan Danau Toba saat matahari terbit" 
+     title="Matahari Terbit di Danau Toba"&gt;
+
+&lt;!-- Menggunakan Absolute Path --&gt;
+&lt;img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" 
+     alt="Pantai pasir putih berair jernih" 
+     title="Pantai Tropis"&gt;</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900">Penjelasan Pengerjaan:</h5>
+                                <p>• <code class="text-blue-600">src="images/pemandangan.jpg"</code>: Sistem mencari file di dalam sub-folder <code class="bg-slate-200 px-1 rounded">images</code> relatif terhadap tempat file HTML disimpan.</p>
+                                <p>• <code class="text-blue-600">alt="..."</code>: Jika koneksi internet terputus atau file terhapus, pembaca layar akan membacakan deskripsi ini.</p>
+                                <p>• <code class="text-blue-600">title="..."</code>: Arahkan kursor mouse ke gambar di browser, maka akan muncul teks kecil melayang (tooltip).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <span class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-2 mr-2 text-blue-600"></i>Pengaturan Dimensi (width, height) & Lazy Loading</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded">Pertemuan 1</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 mb-2 font-semibold">KODE HTML:</p>
+                                <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;img src="assets/gedung.jpg" 
+     alt="Gedung Rektorat Kampus" 
+     width="600" 
+     height="400" 
+     loading="lazy"&gt;</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900">Penjelasan Pengerjaan:</h5>
+                                <p>• Pada HTML5, penulisan <code class="text-blue-600">width="600"</code> dan <code class="text-blue-600">height="400"</code> ditulis sebagai angka murni (tanpa embel-embel 'px').</p>
+                                <p>• Mengatur atribut dimensi ini menjaga aspek rasio gambar dan mencegah efek pergeseran tata letak halaman saat gambar dimuat (Penting untuk skor Google Lighthouse / Core Web Vitals).</p>
+                                <p>• <code class="text-blue-600">loading="lazy"</code> membuat browser menunda pemuatan gambar jika lokasi gambar berada jauh di bawah gulir layar pengguna.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <span class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-3 mr-2 text-indigo-600"></i>Struktur Semantik &lt;figure&gt; dan &lt;figcaption&gt;</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2.5 py-1 rounded">Pertemuan 2</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 mb-2 font-semibold">KODE HTML:</p>
+                                <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;figure class="foto-artikel"&gt;
+  &lt;img src="kura-kura.jpg" alt="Kura-kura hijau berenang di laut"&gt;
+  &lt;figcaption&gt;
+    Gambar 1.2: Spesies Kura-Kura Hijau di Kepulauan Derawan. 
+    &lt;small&gt;(Foto: Dokumentasi Taman Nasional)&lt;small&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900">Penjelasan Pengerjaan:</h5>
+                                <p>• Elemen <code class="text-indigo-600">&lt;figure&gt;</code> menandakan bahwa konten gambar beserta teksnya adalah satu kesatuan unit informasi yang independen.</p>
+                                <p>• Elemen <code class="text-indigo-600">&lt;figcaption&gt;</code> diletakkan di dalam <code class="text-indigo-600">&lt;figure&gt;</code> (bisa di atas atau di bawah tag gambar) untuk memberi keterangan caption resmi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <span class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-4 mr-2 text-indigo-600"></i>Gambar Responsif dengan &lt;picture&gt; dan &lt;source&gt;</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2.5 py-1 rounded">Pertemuan 2</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 mb-2 font-semibold">KODE HTML:</p>
+                                <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;picture&gt;
+  &lt;!-- Layar Desktop (&gt;= 1024px) --&gt;
+  &lt;source media="(min-width: 1024px)" srcset="banner-wide.webp"&gt;
+  
+  &lt;!-- Layar Tablet (&gt;= 640px) --&gt;
+  &lt;source media="(min-width: 640px)" srcset="banner-medium.webp"&gt;
+  
+  &lt;!-- Fallback Default / HP Mobile --&gt;
+  &lt;img src="banner-mobile.jpg" alt="Hero Banner Utama"&gt;
+&lt;/picture&gt;</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900">Penjelasan Pengerjaan:</h5>
+                                <p>• Tag <code class="text-indigo-600">&lt;picture&gt;</code> memungkinkan kita melakukan <em>Art Direction</em> (menyajikan foto cropped/berbeda tergantung ukuran layar HP atau Komputer).</p>
+                                <p>• Browser mengevaluasi atribut <code class="text-indigo-600">media="..."</code> dari atas ke bawah. Tag <code class="text-indigo-600">&lt;img&gt;</code> wajib ada di paling bawah sebagai cadangan jika tidak ada kondisi yang terpenuhi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <span class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-5 mr-2 text-indigo-600"></i>Image Map Interaktif (&lt;map&gt; dan &lt;area&gt;)</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2.5 py-1 rounded">Pertemuan 2</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 mb-2 font-semibold">KODE HTML:</p>
+                                <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;!-- Atribut usemap mereferensikan nama map --&gt;
+&lt;img src="peta-indonesia.jpg" usemap="#petaindo" alt="Peta Indonesia"&gt;
+
+&lt;map name="petaindo"&gt;
+  &lt;!-- Area Persegi (x1, y1, x2, y2) --&gt;
+  &lt;area shape="rect" coords="30,50,150,200" href="sumatera.html" alt="Sumatera"&gt;
+  
+  &lt;!-- Area Lingkaran (centerX, centerY, radius) --&gt;
+  &lt;area shape="circle" coords="300,150,40" href="jawa.html" alt="Jawa"&gt;
+&lt;/map&gt;</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900">Penjelasan Pengerjaan:</h5>
+                                <p>• Atribut <code class="text-indigo-600">usemap="#petaindo"</code> menghubungkan elemen gambar dengan tag <code class="text-indigo-600">&lt;map name="petaindo"&gt;</code>.</p>
+                                <p>• Tag <code class="text-indigo-600">&lt;area&gt;</code> menentukan titik koordinat yang dapat diklik. Jenis bentuk (<code class="text-indigo-600">shape</code>) bisa berupa <code class="bg-slate-200 px-1">rect</code> (persegi), <code class="bg-slate-200 px-1">circle</code> (lingkaran), atau <code class="bg-slate-200 px-1">poly</code> (poligon segi banyak).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <span class="font-bold text-slate-800 text-sm"><i class="fa-solid fa-6 mr-2 text-indigo-600"></i>Pengaturan Atribut Visual CSS Gambar</span>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2.5 py-1 rounded">Pertemuan 2</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-slate-500 mb-2 font-semibold">KODE CSS:</p>
+                                <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg text-xs overflow-x-auto"><code>.gambar-produk {
+  width: 100%;
+  height: 250px;
+  /* Menjaga proporsi tanpa gepeng/distorsi */
+  object-fit: cover; 
+  object-position: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  filter: grayscale(30%);
+  transition: all 0.3s ease;
+}
+
+.gambar-produk:hover {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <h5 class="font-bold text-slate-900">Penjelasan Pengerjaan:</h5>
+                                <p>• <code class="text-indigo-600">object-fit: cover</code>: Properti CSS terpenting agar gambar otomatis terpotong rapi menyesuaikan kotak tanpa tertarik atau terdistorsi gepeng.</p>
+                                <p>• <code class="text-indigo-600">filter</code>: Memberikan efek visual langsung seperti <code class="bg-slate-200 px-1">grayscale</code>, <code class="bg-slate-200 px-1">blur</code>, <code class="bg-slate-200 px-1">brightness</code>, atau <code class="bg-slate-200 px-1">sepia</code>.</p>
+                                <p>• <code class="text-indigo-600">transition & :hover</code>: Membuat efek animasi visual interaktif yang mulus saat kursor pengguna melintas di atas gambar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: PROYEK TERPADU & INTERAKTIF -->
+        <section id="tab3" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                            <span class="p-2 bg-purple-100 text-purple-700 rounded-lg text-lg"><i class="fa-solid fa-layer-group"></i></span>
+                            Proyek Terpadu: Halaman Web Galeri Wisata & Produk
+                        </h2>
+                        <p class="text-slate-600 mt-1">Menggabungkan seluruh tag (<code class="text-xs font-mono">&lt;img&gt;</code>, <code class="text-xs font-mono">&lt;figure&gt;</code>, <code class="text-xs font-mono">&lt;picture&gt;</code>, <code class="text-xs font-mono">&lt;map&gt;</code>) dan Atribut Visual CSS ke dalam satu halaman utuh.</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                        <button onclick="togglePreview('rendered')" id="btn-show-render" class="px-3 py-1.5 text-xs font-bold rounded-md bg-white text-blue-700 shadow-sm transition">
+                            <i class="fa-solid fa-eye mr-1"></i> Tampilan Hasil Web (Live)
+                        </button>
+                        <button onclick="togglePreview('code')" id="btn-show-code" class="px-3 py-1.5 text-xs font-bold rounded-md text-slate-600 hover:text-slate-900 transition">
+                            <i class="fa-solid fa-code mr-1"></i> Kode Sumber HTML/CSS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Render Mode -->
+                <div id="view-rendered" class="space-y-8 border border-slate-200 rounded-2xl p-6 bg-slate-50">
+                    
+                    <!-- 1. Header Banner Responsive Picture -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-slate-200">
+                        <div class="p-3 bg-slate-800 text-white text-xs font-mono flex justify-between items-center">
+                            <span><i class="fa-solid fa-image text-amber-400 mr-2"></i>1. Implementasi Tag &lt;picture&gt; (Header Responsive)</span>
+                            <span class="bg-slate-700 px-2 py-0.5 rounded text-[10px] text-slate-300">Responsif Media Query</span>
+                        </div>
+                        <div class="relative">
+                            <picture>
+                                <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80">
+                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" 
+                                     alt="Banner Wisata Alam" 
+                                     class="w-full h-48 sm:h-64 object-cover">
+                            </picture>
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent flex items-end p-6">
+                                <div class="text-white">
+                                    <span class="bg-blue-600 text-xs px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider">Destinasi Unggulan</span>
+                                    <h3 class="text-xl sm:text-2xl font-bold mt-1">Eksplorasi Pesona Keindahan Alam Nusantara</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Section Figure & Figcaption Grid -->
+                    <div>
+                        <div class="p-3 bg-slate-800 text-white text-xs font-mono rounded-t-xl flex justify-between items-center">
+                            <span><i class="fa-solid fa-images text-emerald-400 mr-2"></i>2. Implementasi Semantik &lt;figure&gt;, &lt;figcaption&gt; & Visual CSS (object-fit, filter, hover)</span>
+                            <span class="bg-slate-700 px-2 py-0.5 rounded text-[10px] text-slate-300">Styling Visual CSS3</span>
+                        </div>
+                        <div class="bg-white p-6 rounded-b-xl border-x border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            
+                            <!-- Card 1 -->
+                            <figure class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-200 hover:shadow-lg transition-all duration-300">
+                                <div class="overflow-hidden h-48 bg-slate-200">
+                                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80" 
+                                         alt="Candi Borobudur" 
+                                         loading="lazy"
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Candi Borobudur</h4>
+                                    <p class="text-xs text-slate-500 mt-1">Warisan budaya dunia di Magelang, Jawa Tengah. Efek filter grayscale aktif sebelum di-hover.</p>
+                                </figcaption>
+                            </figure>
+
+                            <!-- Card 2 -->
+                            <figure class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-200 hover:shadow-lg transition-all duration-300">
+                                <div class="overflow-hidden h-48 bg-slate-200">
+                                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=600&q=80" 
+                                         alt="Keindahan Bali" 
+                                         loading="lazy"
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Pura Ulun Danu Beratan</h4>
+                                    <p class="text-xs text-slate-500 mt-1">Ikon pariwisata Bali dengan pemandangan danau nan megah. Diproses dengan <code class="text-blue-600">object-fit: cover</code>.</p>
+                                </figcaption>
+                            </figure>
+
+                            <!-- Card 3 -->
+                            <figure class="group bg-slate-50 rounded-xl overflow-hidden border border-slate-200 hover:shadow-lg transition-all duration-300">
+                                <div class="overflow-hidden h-48 bg-slate-200">
+                                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" 
+                                         alt="Raja Ampat" 
+                                         loading="lazy"
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                </div>
+                                <figcaption class="p-4">
+                                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Kepulauan Raja Ampat</h4>
+                                    <p class="text-xs text-slate-500 mt-1">Surga keanekaragaman hayati bawah laut di Papua Barat. Menggunakan atribut <code class="text-blue-600">loading="lazy"</code>.</p>
+                                </figcaption>
+                            </figure>
+
+                        </div>
+                    </div>
+
+                    <!-- 3. Section Image Map Interaktif -->
+                    <div>
+                        <div class="p-3 bg-slate-800 text-white text-xs font-mono rounded-t-xl flex justify-between items-center">
+                            <span><i class="fa-solid fa-map-location-dot text-amber-400 mr-2"></i>3. Implementasi Image Map Interaktif (&lt;map&gt; & &lt;area&gt;)</span>
+                            <span class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded text-[10px]">Uji Coba Klik Hotspot</span>
+                        </div>
+                        <div class="bg-white p-6 rounded-b-xl border-x border-b border-slate-200 flex flex-col items-center">
+                            <p class="text-xs text-slate-600 mb-4 text-center">
+                                <i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Arahkan atau klik kotak wilayah (Hotspot) bertanda kuning di bawah ini untuk melihat simulasi pemetaan gambar:
+                            </p>
+                            
+                            <!-- Simulation of Image Map -->
+                            <div class="image-map-container rounded-xl overflow-hidden border border-slate-300 shadow-md">
+                                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Peta Interaktif Layanan" 
+                                     class="w-full max-w-2xl h-auto block">
+                                
+                                <!-- Hotspot 1 (Area Persegi - Rect) -->
+                                <div class="hotspot" style="top: 20%; left: 15%; width: 30%; height: 40%;" 
+                                     onclick="alert('Anda mengklik Area Wilayah Barat (Hotspot Rect)!')" 
+                                     title="Hotspot Area Rect: Zona Barat">
+                                     <span class="bg-slate-900/80 text-white text-[10px] px-1.5 py-0.5 rounded absolute top-1 left-1">Area Rect</span>
+                                </div>
+
+                                <!-- Hotspot 2 (Area Lingkaran - Circle) -->
+                                <div class="hotspot rounded-full" style="top: 30%; left: 60%; width: 100px; height: 100px;" 
+                                     onclick="alert('Anda mengklik Area Pusat (Hotspot Circle)!')" 
+                                     title="Hotspot Area Circle: Zona Pusat">
+                                     <span class="bg-slate-900/80 text-white text-[10px] px-1.5 py-0.5 rounded absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Area Circle</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Code View Mode (Hidden by default) -->
+                <div id="view-code" class="hidden">
+                    <pre class="bg-slate-900 text-slate-100 p-6 rounded-xl text-xs overflow-x-auto leading-relaxed border border-slate-800"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Portal Wisata Nusantara&lt;/title&gt;
+  &lt;style&gt;
+    /* Styling Visual CSS Gambar */
+    .galeri-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .galeri-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover; /* Mencegah gambar gepeng */
+      filter: grayscale(30%);
+      transition: filter 0.3s ease;
+    }
+    .galeri-card:hover img {
+      filter: grayscale(0%);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- 1. Gambar Responsif dengan Tag &lt;picture&gt; --&gt;
+  &lt;header&gt;
+    &lt;picture&gt;
+      &lt;source media="(min-width: 768px)" srcset="banner-desktop.jpg"&gt;
+      &lt;img src="banner-mobile.jpg" alt="Banner Wisata" style="width:100%; height:auto;"&gt;
+    &lt;/picture&gt;
+  &lt;/header&gt;
+
+  &lt;!-- 2. Semantik &lt;figure&gt; & &lt;figcaption&gt; --&gt;
+  &lt;main&gt;
+    &lt;h2&gt;Destinasi Populer&lt;/h2&gt;
+    
+    &lt;figure class="galeri-card"&gt;
+      &lt;img src="borobudur.jpg" alt="Candi Borobudur" loading="lazy" width="600" height="400"&gt;
+      &lt;figcaption&gt;
+        &lt;strong&gt;Candi Borobudur&lt;/strong&gt; - Magelang, Jawa Tengah
+      &lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/main&gt;
+
+  &lt;!-- 3. Image Map Interaktif --&gt;
+  &lt;section&gt;
+    &lt;h2&gt;Peta Navigasi Interaktif&lt;/h2&gt;
+    &lt;img src="peta-wisata.jpg" usemap="#mapwisata" alt="Peta Wisata Interaktif"&gt;
+    
+    &lt;map name="mapwisata"&gt;
+      &lt;area shape="rect" coords="20,20,150,150" href="barat.html" alt="Zona Barat"&gt;
+      &lt;area shape="circle" coords="300,100,50" href="pusat.html" alt="Zona Pusat"&gt;
+    &lt;/map&gt;
+  &lt;/section&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 4: EVALUASI & STUDI KASUS SISWA -->
+        <section id="tab4" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                        <span class="p-2 bg-amber-100 text-amber-700 rounded-lg text-lg"><i class="fa-solid fa-list-check"></i></span>
+                        Evaluasi Pembelajaran & Soal Studi Kasus
+                    </h2>
+                    <p class="text-slate-600 mt-1">Uji pemahaman siswa melalui 15 soal pilihan ganda interaktif dan lembar tugas praktik studi kasus mandiri.</p>
+                </div>
+
+                <!-- Section Quiz Pilihan Ganda -->
+                <div class="mb-12">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-question text-blue-600"></i>
+                            A. Tes Formatif: 15 Soal Pilihan Ganda (Otomatis Dinilai)
+                        </h3>
+                        <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-semibold border border-slate-200">Total: 15 Soal</span>
+                    </div>
+
+                    <form id="quiz-form" class="space-y-6">
+                        
+                        <!-- Question 1 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">1. Tag HTML manakah yang benar dan valid digunakan untuk menyisipkan gambar ke dalam halaman web?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q1" value="A" class="text-blue-600"> A) &lt;image src="foto.jpg"&gt;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q1" value="B" class="text-blue-600"> B) &lt;img src="foto.jpg"&gt;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q1" value="C" class="text-blue-600"> C) &lt;picture href="foto.jpg"&gt;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q1" value="D" class="text-blue-600"> D) &lt;media src="foto.jpg"&gt;
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">2. Apakah fungsi utama dari atribut 'alt' pada elemen &lt;img&gt;?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q2" value="A" class="text-blue-600"> A) Mengubah warna latar belakang gambar.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q2" value="B" class="text-blue-600"> B) Menyediakan teks alternatif jika gambar gagal dimuat dan membantu pembaca layar (screen reader).
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q2" value="C" class="text-blue-600"> C) Menentukan ukuran animasi saat gambar di-hover.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q2" value="D" class="text-blue-600"> D) Menghubungkan gambar ke halaman tautan eksternal.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">3. Jika sebuah file gambar berada di dalam folder "images" yang sejajar dengan file index.html, penulisan atribut src yang tepat adalah...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q3" value="A" class="text-blue-600"> A) src="../images/logo.png"
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q3" value="B" class="text-blue-600"> B) src="images/logo.png"
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q3" value="C" class="text-blue-600"> C) src="/C:/images/logo.png"
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q3" value="D" class="text-blue-600"> D) src="logo.png/images"
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 4 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">4. Pasangan tag HTML5 manakah yang tepat untuk membungkus gambar beserta teks keterangannya (caption)?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q4" value="A" class="text-blue-600"> A) &lt;div&gt; dan &lt;p&gt;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q4" value="B" class="text-blue-600"> B) &lt;section&gt; dan &lt;title&gt;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q4" value="C" class="text-blue-600"> C) &lt;figure&gt; dan &lt;figcaption&gt;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q4" value="D" class="text-blue-600"> D) &lt;picture&gt; dan &lt;summary&gt;
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 5 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">5. Format gambar manakah yang mendukung transparansi (alpha channel) dan kompresi tanpa kehilangan kualitas (lossless)?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q5" value="A" class="text-blue-600"> A) JPEG
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q5" value="B" class="text-blue-600"> B) BMP
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q5" value="C" class="text-blue-600"> C) PNG
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q5" value="D" class="text-blue-600"> D) MP4
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 6 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">6. Apa keuntungan utama dari memasang atribut 'loading="lazy"' pada tag &lt;img&gt;?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q6" value="A" class="text-blue-600"> A) Memperbesar ukuran resolusi gambar secara otomatis.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q6" value="B" class="text-blue-600"> B) Menunda pemuatan gambar di luar layar sampai pengguna mengulirnya, sehingga menghemat bandwidth.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q6" value="C" class="text-blue-600"> C) Mengubah format gambar menjadi Vektor SVG.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q6" value="D" class="text-blue-600"> D) Membuat gambar tidak bisa di-download oleh pengunjung.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 7 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">7. Properti CSS 'object-fit: cover;' berfungsi untuk...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q7" value="A" class="text-blue-600"> A) Memaksa gambar gepeng menyesuaikan tinggi wadah.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q7" value="B" class="text-blue-600"> B) Mengisi seluruh dimensi wadah sambil mempertahankan proporsi gambar (terpotong rapi jika perlu).
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q7" value="C" class="text-blue-600"> C) Menyembunyikan gambar saat layar di-resize.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q7" value="D" class="text-blue-600"> D) Membuat gambar menjadi transparan 50%.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 8 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">8. Elemen &lt;picture&gt; dalam HTML5 paling tepat digunakan saat kita membutuhkan...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q8" value="A" class="text-blue-600"> A) Galeri gambar bergerak otomatis (slideshow).
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q8" value="B" class="text-blue-600"> B) Penyajian gambar yang responsif berdasarkan kriteria media query / ukuran layar pengguna.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q8" value="C" class="text-blue-600"> C) Kompresi video ke GIF.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q8" value="D" class="text-blue-600"> D) Menampilkan teks melayang di tengah gambar.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 9 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">9. Untuk menghubungkan tag &lt;img&gt; dengan peta area &lt;map name="peta-kampus"&gt;, atribut yang harus ditulis pada tag &lt;img&gt; adalah...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q9" value="A" class="text-blue-600"> A) map="peta-kampus"
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q9" value="B" class="text-blue-600"> B) usemap="#peta-kampus"
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q9" value="C" class="text-blue-600"> C) href="#peta-kampus"
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q9" value="D" class="text-blue-600"> D) target="peta-kampus"
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 10 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">10. Atribut 'shape' pada tag &lt;area&gt; dapat diisi dengan nilai berikut, KECUALI...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q10" value="A" class="text-blue-600"> A) rect
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q10" value="B" class="text-blue-600"> B) circle
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q10" value="C" class="text-blue-600"> C) poly
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q10" value="D" class="text-blue-600"> D) triangle
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 11 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">11. Manakah perintah CSS yang tepat untuk membuat sudut gambar menjadi melengkung bulat penuh (lingkaran)?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q11" value="A" class="text-blue-600"> A) border-radius: 50%;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q11" value="B" class="text-blue-600"> B) border-style: circle;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q11" value="C" class="text-blue-600"> C) image-round: 100px;
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q11" value="D" class="text-blue-600"> D) box-shadow: round;
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 12 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">12. Atribut 'title' pada gambar berguna untuk...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q12" value="A" class="text-blue-600"> A) Menentukan judul dokumen HTML di tab browser.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q12" value="B" class="text-blue-600"> B) Menampilkan petunjuk teks melayang (tooltip) ketika kursor diarahkan ke gambar.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q12" value="C" class="text-blue-600"> C) Mengubah kata kunci pencarian Google.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q12" value="D" class="text-blue-600"> D) Menentukan hak cipta gambar.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 13 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">13. Mengapa sebaiknya kita mencantumkan atribut 'width' dan 'height' langsung pada tag &lt;img&gt;?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q13" value="A" class="text-blue-600"> A) Agar file gambar berubah menjadi format SVG.
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q13" value="B" class="text-blue-600"> B) Untuk memberikan alokasi ruang awal sehingga mencegahCumulative Layout Shift (CLS).
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q13" value="C" class="text-blue-600"> C) Agar gambar secara otomatis berada di posisi tengah (center).
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q13" value="D" class="text-blue-600"> D) Agar resolusi foto bertambah tajam.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 14 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">14. Manakah efek filter CSS yang tepat untuk membuat gambar menjadi hitam putih?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q14" value="A" class="text-blue-600"> A) filter: grayscale(100%);
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q14" value="B" class="text-blue-600"> B) filter: blur(5px);
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q14" value="C" class="text-blue-600"> C) filter: invert(100%);
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q14" value="D" class="text-blue-600"> D) filter: contrast(0%);
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Question 15 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-semibold text-sm text-slate-800 mb-3">15. Format vektor berukuran ringan yang ideal untuk logo dan icon web tanpa pecah saat diperbesar adalah...</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q15" value="A" class="text-blue-600"> A) TIFF
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q15" value="B" class="text-blue-600"> B) SVG
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q15" value="C" class="text-blue-600"> C) JPEG
+                                </label>
+                                <label class="flex items-center gap-2.5 p-2 bg-white rounded border border-slate-200 hover:bg-blue-50 cursor-pointer">
+                                    <input type="radio" name="q15" value="D" class="text-blue-600"> D) PSD
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex items-center justify-between">
+                            <button type="button" onclick="gradeQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg text-sm shadow transition">
+                                <i class="fa-solid fa-paper-plane mr-2"></i> Periksa & Kirim Jawaban
+                            </button>
+                            <div id="quiz-result" class="font-bold text-lg hidden"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Section Tugas Praktik Studi Kasus Siswa -->
+                <div class="border-t border-slate-200 pt-8">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code text-indigo-600"></i>
+                        B. Lembar Tugas Praktik Studi Kasus Siswa (2 Pertemuan)
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Tugas Pertemuan 1 -->
+                        <div class="p-5 bg-gradient-to-br from-blue-50 to-slate-50 border border-blue-200 rounded-xl space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold bg-blue-600 text-white px-2.5 py-1 rounded">Pertemuan 1 (4 JP)</span>
+                                <span class="text-xs text-slate-500 font-semibold">Tugas Mandiri/Kelompok</span>
+                            </div>
+                            <h4 class="font-bold text-slate-800">Studi Kasus 1: "Halaman Galeri Destinasi Wisata Daerah"</h4>
+                            <p class="text-xs text-slate-600 text-justify">
+                                Buatlah struktur folder proyek web baru <code class="bg-blue-100 text-blue-800 px-1 rounded">proyek-galeri/</code>. Di dalamnya ciptakan sub-folder <code class="bg-blue-100 text-blue-800 px-1 rounded">images/</code>.
+                            </p>
+                            <div class="text-xs text-slate-700 space-y-1 bg-white p-3 rounded-lg border border-slate-200">
+                                <p class="font-bold">Ketentuan Teknis:</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Minimal menyisipkan 3 objek gambar dengan format berbeda (JPG, PNG, WebP).</li>
+                                    <li>Wajib menerapkan <em>Relative Path</em> yang benar.</li>
+                                    <li>Setiap gambar wajib dilengkapi atribut <code class="text-blue-700 font-mono">alt</code> deskriptif dan atribut <code class="text-blue-700 font-mono">title</code>.</li>
+                                    <li>Tentukan atribut <code class="text-blue-700 font-mono">width</code> dan <code class="text-blue-700 font-mono">height</code> murni untuk mencegah CLS.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tugas Pertemuan 2 -->
+                        <div class="p-5 bg-gradient-to-br from-indigo-50 to-slate-50 border border-indigo-200 rounded-xl space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold bg-indigo-600 text-white px-2.5 py-1 rounded">Pertemuan 2 (4 JP)</span>
+                                <span class="text-xs text-slate-500 font-semibold">Tugas Portofolio</span>
+                            </div>
+                            <h4 class="font-bold text-slate-800">Studi Kasus 2: "Katalog Produk Interaktif & Peta Lokasi Toko"</h4>
+                            <p class="text-xs text-slate-600 text-justify">
+                                Kembangkan halaman galeri sebelumnya menjadi situs katalog interaktif yang estetik dan responsif.
+                            </p>
+                            <div class="text-xs text-slate-700 space-y-1 bg-white p-3 rounded-lg border border-slate-200">
+                                <p class="font-bold">Ketentuan Teknis:</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Bungkus setiap item kartu produk dengan tag semantik <code class="text-indigo-700 font-mono">&lt;figure&gt;</code> dan <code class="text-indigo-700 font-mono">&lt;figcaption&gt;</code>.</li>
+                                    <li>Gunakan <code class="text-indigo-700 font-mono">&lt;picture&gt;</code> untuk banner promo utama di bagian atas halaman.</li>
+                                    <li>Buat 1 gambar denah denah toko/peta kawasan yang dilengkapi Image Map (<code class="text-indigo-700 font-mono">&lt;map&gt;</code> & <code class="text-indigo-700 font-mono">&lt;area&gt;</code> minimal 2 titik hotspot klik).</li>
+                                    <li>Berikan efek visual CSS: <code class="text-indigo-700 font-mono">object-fit: cover</code>, <code class="text-indigo-700 font-mono">border-radius</code>, <code class="text-indigo-700 font-mono">box-shadow</code>, dan animasi hover.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
+            <p>Modul Pembelajaran Interaktif Pemrograman Web &copy; 2026 - Menyisipkan Objek Gambar & Atribut Visual</p>
+            <p class="text-slate-500">Dirancang untuk Pembelajaran 2 Pertemuan (4 JP x 2 = 8 JP / 360 Menit)</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('block');
+            });
+
+            // Deactivate all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show current tab & activate current button
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(tabId).classList.add('block');
+            document.getElementById('btn-' + tabId).classList.add('active');
+
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Live Render vs Code in Tab 3
+        function togglePreview(mode) {
+            const renderBox = document.getElementById('view-rendered');
+            const codeBox = document.getElementById('view-code');
+            const btnRender = document.getElementById('btn-show-render');
+            const btnCode = document.getElementById('btn-show-code');
+
+            if (mode === 'rendered') {
+                renderBox.classList.remove('hidden');
+                codeBox.classList.add('hidden');
+                btnRender.classList.add('bg-white', 'text-blue-700', 'shadow-sm');
+                btnRender.classList.remove('text-slate-600');
+                btnCode.classList.remove('bg-white', 'text-blue-700', 'shadow-sm');
+                btnCode.classList.add('text-slate-600');
+            } else {
+                renderBox.classList.add('hidden');
+                codeBox.classList.remove('hidden');
+                btnCode.classList.add('bg-white', 'text-blue-700', 'shadow-sm');
+                btnCode.classList.remove('text-slate-600');
+                btnRender.classList.remove('bg-white', 'text-blue-700', 'shadow-sm');
+                btnRender.classList.add('text-slate-600');
+            }
+        }
+
+        // Quiz Grading Engine
+        function gradeQuiz() {
+            const answers = {
+                q1: 'B',
+                q2: 'B',
+                q3: 'B',
+                q4: 'C',
+                q5: 'C',
+                q6: 'B',
+                q7: 'B',
+                q8: 'B',
+                q9: 'B',
+                q10: 'D',
+                q11: 'A',
+                q12: 'B',
+                q13: 'B',
+                q14: 'A',
+                q15: 'B'
+            };
+
+            let score = 0;
+            let total = 15;
+
+            for (let i = 1; i <= total; i++) {
+                const qName = 'q' + i;
+                const selected = document.querySelector(`input[name="${qName}"]:checked`);
+                if (selected && selected.value === answers[qName]) {
+                    score++;
+                }
+            }
+
+            const percentage = Math.round((score / total) * 100);
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+
+            if (percentage >= 75) {
+                resultDiv.className = 'font-bold text-sm sm:text-base px-4 py-2 bg-emerald-100 text-emerald-800 rounded-lg border border-emerald-300';
+                resultDiv.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Nilai Anda: ${percentage} / 100 (${score} dari 15 benar) - SANGAT BAIK!`;
+            } else {
+                resultDiv.className = 'font-bold text-sm sm:text-base px-4 py-2 bg-amber-100 text-amber-800 rounded-lg border border-amber-300';
+                resultDiv.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Nilai Anda: ${percentage} / 100 (${score} dari 15 benar) - Perlu Pelajari Lagi!`;
+            }
+        }
+    </script>
+</body>
+</html>
