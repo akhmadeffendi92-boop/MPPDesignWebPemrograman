@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Pembelajaran HTML Dasar - 2 Pertemuan (4 JP)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .font-mono-code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .tab-btn {
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: #4f46e5;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.12);
+            border-bottom: 3px solid #4f46e5;
+        }
+
+        .code-block {
+            background-color: #0f172a;
+            color: #38bdf8;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+        }
+
+        .tag-badge {
+            font-family: 'Fira Code', monospace;
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 0.15rem 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-indigo-500/30">
+                        &lt;/&gt;
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight text-white">Modul Pembelajaran HTML Dasar</h1>
+                        <p class="text-xs text-indigo-300 font-medium">Heading, Pemformatan Teks, & Hyperlink Antar Halaman</p>
+                    </div>
+                </div>
+
+                <!-- Kurikulum Metadata -->
+                <div class="flex items-center gap-3 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700/60 text-xs text-slate-300">
+                    <div class="flex items-center gap-1.5 border-r border-slate-700 pr-3">
+                        <span class="text-indigo-400 font-bold">Guru Mapel:</span>
+                        <span>Akhmad Noor Effendi, S.Kom</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-emerald-400 font-bold">🎯 Level:</span>
+                        <span>Pemula (Dasar)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB NAVIGATION -->
+            <nav class="flex space-x-2 overflow-x-auto custom-scrollbar pt-2 pb-1 border-t border-slate-800/80" id="tabContainer">
+                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-5 py-3 rounded-t-xl text-sm font-bold flex items-center gap-2 whitespace-nowrap text-slate-400 hover:text-indigo-600">
+                    <span>📚</span> Pengertian & Fungsi
+                </button>
+                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn px-5 py-3 rounded-t-xl text-sm font-bold flex items-center gap-2 whitespace-nowrap text-slate-400 hover:text-indigo-600">
+                    <span>⚙️</span> Contoh per Tag
+                </button>
+                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn px-5 py-3 rounded-t-xl text-sm font-bold flex items-center gap-2 whitespace-nowrap text-slate-400 hover:text-indigo-600">
+                    <span>🌐</span> Penggabungan & Simulator
+                </button>
+                <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn px-5 py-3 rounded-t-xl text-sm font-bold flex items-center gap-2 whitespace-nowrap text-slate-400 hover:text-indigo-600">
+                    <span>📝</span> Studi Kasus & Soal Latihan
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- ==========================================
+             TAB 1: PENGERTIAN, FUNGSI, DAN KEGUNAAN
+             ========================================== -->
+        <section id="tab1" class="tab-content space-y-8 animate-in fade-in duration-300">
+            
+            <!-- Banner Alokasi 2 Pertemuan -->
+            <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                <div class="relative z-10 max-w-3xl">
+                    <span class="bg-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-indigo-400/30 mb-3 inline-block">
+                        Rencana Kegiatan 2 Pertemuan
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Struktur Materi Tag Pemrograman</h2>
+                    <p class="text-indigo-200 text-sm leading-relaxed mb-6">
+                        Modul ini dirancang untuk dilaksanakan dalam 2 kali pertemuan (masing-masing 4 JP x 45 menit = 180 menit). Pembagian disusun berjenjang mulai dari pengenalan struktur hingga praktik pembangunan halaman web utuh yang saling terhubung.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+                            <h4 class="font-bold text-amber-300 text-sm flex items-center gap-2">
+                                <span>📌</span> Pertemuan 1 (4 JP / 180 Menit)
+                            </h4>
+                            <p class="text-xs text-indigo-100 mt-1">Konsep Dasar HTML, Penulisan Tag Heading, dan Pemformatan Teks Lengkap (Bold, Italic, Highlight, dll).</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+                            <h4 class="font-bold text-emerald-300 text-sm flex items-center gap-2">
+                                <span>🔗</span> Pertemuan 2 (4 JP / 180 Menit)
+                            </h4>
+                            <p class="text-xs text-indigo-100 mt-1">Konsep Hyperlink (Internal & Eksternal), Menghubungkan 2 File HTML, Studi Kasus & Evaluasi Praktik.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Penjelasan Lengkap HTML -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                        <span class="bg-indigo-100 text-indigo-600 w-9 h-9 flex items-center justify-center rounded-xl text-lg font-black">1</span>
+                        Pengertian Dasar HTML & Filosofinya
+                    </h2>
+                    <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                        <strong class="text-indigo-600">HTML (HyperText Markup Language)</strong> adalah bahasa standar penandaan (*markup*) yang digunakan untuk membuat dan menyusun struktur dasar dari sebuah halaman web. Perlu dipahami oleh siswa bahwa <em>HTML bukanlah bahasa pemrograman</em> (karena tidak memiliki logika seperti perulangan atau pengondisian), melainkan **bahasa struktur/fondasi**.
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed mt-2">
+                        Analogi terbaik untuk memahami HTML adalah **Kerangka Manusia** atau **Kerangka Bangunan**. HTML menentukan di mana letak judul, paragraf, gambar, dan tombol. Tanpa HTML, browser tidak tahu bagaimana cara menampilkan informasi secara teratur.
+                    </p>
+                </div>
+
+                <!-- 3 Komponen Utama Dalam Modul -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                    
+                    <!-- Card Heading -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-all space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-2xl font-bold">
+                            📑
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-lg">A. Tag Heading (`<h1>` - `<h6>`)</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Pengertian:</strong> Tag khusus yang digunakan untuk mendefinisikan judul utama dan sub-judul berjenjang dalam sebuah dokumen HTML.
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Fungsi:</strong> Memberikan tingkatan/hirarki visual dan struktur informasi dari derajat terbesar (<span class="tag-badge">&lt;h1&gt;</span>) sampai terkecil (<span class="tag-badge">&lt;h6&gt;</span>).
+                        </p>
+                        <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs text-amber-800">
+                            💡 <strong>Kegunaan Relevan:</strong>
+                            <ul class="list-disc list-inside mt-1 space-y-1 text-[11px]">
+                                <li><strong>Kemudahan Membaca (UX):</strong> Pembaca web bisa melakukan <em>scanning</em> judul dengan cepat.</li>
+                                <li><strong>SEO (Search Engine Optimization):</strong> Mesin pencari seperti Google menggunakan <span class="font-bold">&lt;h1&gt;</span> untuk memahami topik utama halaman web.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card Format Teks -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-all space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-2xl font-bold">
+                            ✍️
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-lg">B. Pemformatan Teks</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Pengertian:</strong> Kumpulan tag HTML yang bertugas mengubah tampilan atau memberikan penekanan makna pada kata/kalimat di dalam paragraf.
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Fungsi:</strong> Menandai teks agar tebal (<span class="tag-badge">&lt;b&gt;</span>/<span class="tag-badge">&lt;strong&gt;</span>), miring (<span class="tag-badge">&lt;i&gt;</span>/<span class="tag-badge">&lt;em&gt;</span>), bergaris bawah (<span class="tag-badge">&lt;u&gt;</span>), atau diberi stabilo (<span class="tag-badge">&lt;mark&gt;</span>).
+                        </p>
+                        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-200 text-xs text-indigo-800">
+                            💡 <strong>Kegunaan Relevan:</strong>
+                            <ul class="list-disc list-inside mt-1 space-y-1 text-[11px]">
+                                <li><strong>Penekanan Informasi:</strong> Menarik perhatian pembaca pada poin kunci/kata penting.</li>
+                                <li><strong>Istilah Asing:</strong> Tag <span class="font-bold">&lt;i&gt;</span> digunakan sesuai kaidah bahasa untuk istilah bahasa asing atau jargon teknis.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card Hyperlink -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-all space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl font-bold">
+                            🔗
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-lg">C. Tag Hyperlink (`<a>`)</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Pengertian:</strong> Tag <em>Anchor</em> yang berfungsi menghubungkan satu dokumen HTML dengan dokumen HTML lainnya, atau ke situs eksternal.
+                        </p>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Fungsi:</strong> Menyediakan elemen interaktif (teks/tombol) yang jika diklik akan mengarahkan pengguna ke alamat URL atau lokasi file tujuan.
+                        </p>
+                        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-xs text-emerald-800">
+                            💡 <strong>Kegunaan Relevan:</strong>
+                            <ul class="list-disc list-inside mt-1 space-y-1 text-[11px]">
+                                <li><strong>Navigasi Situs:</strong> Tanpa hyperlink, web hanya berupa file terisolasi. Hyperlink menjadikan jutaan halaman web menjadi jaringan **World Wide Web**.</li>
+                                <li><strong>Interaktivitas Antar Halaman:</strong> Memungkinkan pembuatan menu navigasi seperti *Beranda*, *Profil*, dan *Kontak*.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tabel Detail Fungsi & Atribut Tag -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+                <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <span>📚</span> Rincian Daftar Tag & Fungsinya
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-bold uppercase border-b border-slate-200">
+                                <th class="p-3">Kategori</th>
+                                <th class="p-3">Nama Tag</th>
+                                <th class="p-3">Sintaks dasar</th>
+                                <th class="p-3">Fungsi Utama</th>
+                                <th class="p-3">Tampilan Default</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-600">
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-800" rowspan="2">Heading</td>
+                                <td class="p-3"><span class="tag-badge">&lt;h1&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;h1&gt;Judul&lt;/h1&gt;</td>
+                                <td class="p-3">Judul Tingkat Utama (Paling penting)</td>
+                                <td class="p-3 font-bold text-lg text-slate-900">Judul Utama</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;h2&gt; - &lt;h6&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;h2&gt;Sub Judul&lt;/h2&gt;</td>
+                                <td class="p-3">Sub-judul tingkat 2 sampai 6</td>
+                                <td class="p-3 font-semibold text-slate-800">Sub Judul</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-800" rowspan="6">Pemformatan Teks</td>
+                                <td class="p-3"><span class="tag-badge">&lt;b&gt;</span> / <span class="tag-badge">&lt;strong&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;b&gt;Teks&lt;/b&gt;</td>
+                                <td class="p-3">Menebalkan teks secara visual / penting</td>
+                                <td class="p-3 font-bold">Teks Tebal</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;i&gt;</span> / <span class="tag-badge">&lt;em&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;i&gt;Teks&lt;/i&gt;</td>
+                                <td class="p-3">Memiringkan teks (istilah/penekanan)</td>
+                                <td class="p-3 italic">Teks Miring</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;u&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;u&gt;Teks&lt;/u&gt;</td>
+                                <td class="p-3">Memberi garis bawah pada teks</td>
+                                <td class="p-3 underline">Teks Garis Bawah</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;mark&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;mark&gt;Teks&lt;/mark&gt;</td>
+                                <td class="p-3">Memberikan sorotan/efek stabilo kuning</td>
+                                <td class="p-3"><mark class="bg-yellow-300 px-1">Teks Stabilo</mark></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;p&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;p&gt;Paragraf&lt;/p&gt;</td>
+                                <td class="p-3">Membuat blok paragraf teks baru</td>
+                                <td class="p-3">Paragraf teks biasa</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;br&gt;</span> & <span class="tag-badge">&lt;hr&gt;</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;br&gt; / &lt;hr&gt;</td>
+                                <td class="p-3"><span class="font-bold">&lt;br&gt;</span> = ganti baris, <span class="font-bold">&lt;hr&gt;</span> = garis pembatas horizontal</td>
+                                <td class="p-3">Ganti baris / Garis Horizontal</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-800" rowspan="2">Hyperlink</td>
+                                <td class="p-3"><span class="tag-badge">&lt;a&gt; (Internal)</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;a href="profil.html"&gt;Profil&lt;/a&gt;</td>
+                                <td class="p-3">Link menuju file HTML lain dalam folder yang sama</td>
+                                <td class="p-3 text-blue-600 underline cursor-pointer">Profil Saya</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="tag-badge">&lt;a&gt; (Eksternal)</span></td>
+                                <td class="p-3 font-mono text-indigo-600">&lt;a href="https://google.com" target="_blank"&gt;Google&lt;/a&gt;</td>
+                                <td class="p-3">Link menuju URL web di luar situs (target="_blank" membuka tab baru)</td>
+                                <td class="p-3 text-blue-600 underline cursor-pointer">Buka Google ↗</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==========================================
+             TAB 2: CONTOH PENGERJAAN MASING-MASING TAG
+             ========================================== -->
+        <section id="tab2" class="tab-content hidden space-y-8 animate-in fade-in duration-300">
+            
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Contoh Penulisan & Hasil Tampilan Masing-Masing Tag</h2>
+                <p class="text-slate-600 text-sm mb-6">
+                    Berikut adalah panduan teknis penulisan sintaks kode beserta simulasi langsung hasil penampilannya di dalam layar browser.
+                </p>
+
+                <!-- 1. Heading Example -->
+                <div class="mb-10 space-y-4">
+                    <div class="flex items-center gap-3 border-l-4 border-amber-500 pl-4 py-1">
+                        <h3 class="text-lg font-bold text-slate-800">1. Contoh Tag Heading (`<h1>` - `<h6>`)</h3>
+                    </div>
+                    <p class="text-xs text-slate-600">Perhatikan bagaimana ukuran teks mengecil secara otomatis dari H1 hingga H6.</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Kode HTML:</span>
+                            <div class="code-block">
+&lt;h1&gt;Judul Tingkat 1 (paling besar)&lt;/h1&gt;
+&lt;h2&gt;Sub-Judul Tingkat 2&lt;/h2&gt;
+&lt;h3&gt;Sub-Judul Tingkat 3&lt;/h3&gt;
+&lt;h4&gt;Sub-Judul Tingkat 4&lt;/h4&gt;
+&lt;h5&gt;Sub-Judul Tingkat 5&lt;/h5&gt;
+&lt;h6&gt;Sub-Judul Tingkat 6 (paling kecil)&lt;/h6&gt;
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Tampilan di Browser:</span>
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-2">
+                                <h1 class="text-3xl font-extrabold text-slate-900 leading-tight">Judul Tingkat 1 (paling besar)</h1>
+                                <h2 class="text-2xl font-bold text-slate-800">Sub-Judul Tingkat 2</h2>
+                                <h3 class="text-xl font-semibold text-slate-700">Sub-Judul Tingkat 3</h3>
+                                <h4 class="text-base font-semibold text-slate-600">Sub-Judul Tingkat 4</h4>
+                                <h5 class="text-sm font-medium text-slate-500">Sub-Judul Tingkat 5</h5>
+                                <h6 class="text-xs font-normal text-slate-400 uppercase">Sub-Judul Tingkat 6 (paling kecil)</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Formatting Example -->
+                <div class="mb-10 space-y-4">
+                    <div class="flex items-center gap-3 border-l-4 border-indigo-500 pl-4 py-1">
+                        <h3 class="text-lg font-bold text-slate-800">2. Contoh Tag Pemformatan Teks</h3>
+                    </div>
+                    <p class="text-xs text-slate-600">Tag pemformatan biasanya diletakkan di dalam tag paragraf (<span class="tag-badge">&lt;p&gt;</span>).</p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Kode HTML:</span>
+                            <div class="code-block">
+&lt;p&gt;
+  Ini adalah kata &lt;b&gt;Tebal&lt;/b&gt; dan kata &lt;strong&gt;Sangat Penting&lt;/strong&gt;.&lt;br&gt;
+  Ini adalah kata &lt;i&gt;Miring (Italic)&lt;/i&gt; untuk bahasa asing.&lt;br&gt;
+  Ini adalah kata bergaris &lt;u&gt;Bawah (Underline)&lt;/u&gt;.&lt;br&gt;
+  Ini adalah teks dengan &lt;mark&gt;Stabilo / Highlight&lt;/mark&gt;.
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;
+  Kombinasi: &lt;b&gt;&lt;i&gt;&lt;u&gt;Tebal, Miring & Garis Bawah&lt;/u&gt;&lt;/i&gt;&lt;/b&gt; sekaligus.
+&lt;/p&gt;
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Tampilan di Browser:</span>
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3 text-slate-700 text-sm leading-relaxed">
+                                <p>
+                                    Ini adalah kata <b>Tebal</b> dan kata <strong>Sangat Penting</strong>.<br>
+                                    Ini adalah kata <i>Miring (Italic)</i> untuk bahasa asing.<br>
+                                    Ini adalah kata bergaris <u>Bawah (Underline)</u>.<br>
+                                    Ini adalah teks dengan <mark class="bg-amber-300 px-1 rounded-sm">Stabilo / Highlight</mark>.
+                                </p>
+                                <hr class="border-slate-300">
+                                <p>
+                                    Kombinasi: <b><i><u>Tebal, Miring & Garis Bawah</u></i></b> sekaligus.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Hyperlink Example -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 border-l-4 border-emerald-500 pl-4 py-1">
+                        <h3 class="text-lg font-bold text-slate-800">3. Contoh Tag Hyperlink (`<a>`)</h3>
+                    </div>
+                    <p class="text-xs text-slate-600">Perhatikan penggunaan atribut <span class="font-mono text-indigo-600 font-bold">href="..."</span> sebagai penentu lokasi tujuan.</p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Kode HTML:</span>
+                            <div class="code-block">
+&lt;!-- Link Internal (Ke file lain dalam folder proyek) --&gt;
+&lt;p&gt;
+  Buka &lt;a href="profil.html"&gt;Halaman Profil Saya&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;!-- Link Eksternal (Ke situs web luar) --&gt;
+&lt;p&gt;
+  Kunjungi &lt;a href="https://google.com" target="_blank"&gt;Google Search&lt;/a&gt;
+&lt;/p&gt;
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Tampilan di Browser:</span>
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4 text-sm">
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                    <p class="text-slate-600">
+                                        Buka <span class="text-indigo-600 font-bold underline cursor-pointer hover:text-indigo-800">Halaman Profil Saya</span>
+                                    </p>
+                                    <span class="text-[10px] text-slate-400 block mt-1">📌 Mengarahkan ke file lokal <code>profil.html</code></span>
+                                </div>
+
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                    <p class="text-slate-600">
+                                        Kunjungi <span class="text-emerald-600 font-bold underline cursor-pointer hover:text-emerald-800">Google Search ↗</span>
+                                    </p>
+                                    <span class="text-[10px] text-slate-400 block mt-1">📌 Membuka URL luar di tab baru (karena <code>target="_blank"</code>)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ==========================================
+             TAB 3: PENGGABUNGAN SEMUA TAG & SIMULATOR
+             ========================================== -->
+        <section id="tab3" class="tab-content hidden space-y-8 animate-in fade-in duration-300">
+            
+            <div class="bg-indigo-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <span class="bg-indigo-500/30 text-indigo-200 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-indigo-400/30 mb-2 inline-block">
+                        Praktik Pertemuan 2
+                    </span>
+                    <h2 class="text-2xl font-extrabold">Proyek Web 2 Halaman Terintegrasi</h2>
+                    <p class="text-indigo-200 text-sm mt-1">
+                        Di bawah ini adalah penggabungan seluruh tag (Heading, Format Teks, dan Link) ke dalam dua file: <code>index.html</code> (Beranda) dan <code>profil.html</code> (Halaman Profil).
+                    </p>
+                </div>
+                <div class="bg-indigo-800/80 px-6 py-4 rounded-2xl border border-indigo-700 text-center min-w-[200px]">
+                    <p class="text-xs text-indigo-300">Target Belajar</p>
+                    <p class="text-lg font-bold text-amber-300">Navigasi Bolak-Balik</p>
+                </div>
+            </div>
+
+            <!-- Kode Editor Dual File -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- File 1: index.html -->
+                <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-slate-800 text-white px-5 py-3 flex justify-between items-center">
+                        <span class="font-mono text-xs font-bold text-emerald-400 flex items-center gap-2">
+                            <span>📄</span> index.html (Halaman Beranda)
+                        </span>
+                        <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">File 1</span>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="code-block text-xs h-[380px] overflow-y-auto custom-scrollbar">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Beranda - Web Saya&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- HEADING UTAMA --&gt;
+    &lt;h1&gt;Selamat Datang di Website Saya&lt;/h1&gt;
+    &lt;h3&gt;Portal Informasi Belajar HTML&lt;/h3&gt;
+
+    &lt;hr&gt;
+
+    &lt;!-- NAVIGASI ANTAR HALAMAN --&gt;
+    &lt;p&gt;
+        &lt;b&gt;Navigasi:&lt;/b&gt; 
+        Beranda | &lt;a href="profil.html"&gt;Ke Halaman Profil Saya&lt;/a&gt;
+    &lt;/p&gt;
+
+    &lt;hr&gt;
+
+    &lt;!-- PARAGRAF & PEMFORMATAN TEKS --&gt;
+    &lt;h2&gt;Pengenalan&lt;/h2&gt;
+    &lt;p&gt;
+        Halo! Nama saya &lt;b&gt;Budi Santoso&lt;/b&gt;. Saat ini saya sedang 
+        mempraktikkan &lt;i&gt;Pemrograman Web Dasar&lt;/i&gt; khususnya tentang 
+        pemformatan teks dan pembuatan link.
+    &lt;/p&gt;
+    
+    &lt;p&gt;
+        Materi ini &lt;mark&gt;sangat mudah dan menyenangkan&lt;/mark&gt; untuk dipelajari!
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File 2: profil.html -->
+                <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col">
+                    <div class="bg-slate-800 text-white px-5 py-3 flex justify-between items-center">
+                        <span class="font-mono text-xs font-bold text-amber-400 flex items-center gap-2">
+                            <span>📄</span> profil.html (Halaman Profil)
+                        </span>
+                        <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">File 2</span>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <div class="code-block text-xs h-[380px] overflow-y-auto custom-scrollbar">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Profil Saya - Web Saya&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- HEADING --&gt;
+    &lt;h1&gt;Profil Lengkap Saya&lt;/h1&gt;
+
+    &lt;hr&gt;
+
+    &lt;!-- NAVIGASI KEMBALI KE INDEX --&gt;
+    &lt;p&gt;
+        &lt;b&gt;Navigasi:&lt;/b&gt; 
+        &lt;a href="index.html"&gt;Kembali ke Beranda&lt;/a&gt; | Profil Saya
+    &lt;/p&gt;
+
+    &lt;hr&gt;
+
+    &lt;!-- BIODATA DENGAN FORMAT TEKS --&gt;
+    &lt;h2&gt;Biodata Diri&lt;/h2&gt;
+    &lt;p&gt;
+        &lt;b&gt;Nama:&lt;/b&gt; Budi Santoso&lt;br&gt;
+        &lt;b&gt;Hobi:&lt;/b&gt; Koding, &lt;i&gt;Reading&lt;/i&gt;, dan Musik.&lt;br&gt;
+        &lt;b&gt;Cita-cita:&lt;/b&gt; Menjadi &lt;u&gt;Web Developer Handal&lt;/u&gt;.
+    &lt;/p&gt;
+
+    &lt;!-- HYPERLINK EKSTERNAL --&gt;
+    &lt;h3&gt;Link Favorit:&lt;/h3&gt;
+    &lt;p&gt;
+        Kunjungi &lt;a href="https://google.com" target="_blank"&gt;Google Search&lt;/a&gt;
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIMULATOR BROWSER INTERAKTIF -->
+            <div class="bg-white rounded-3xl border-2 border-indigo-200 shadow-lg overflow-hidden">
+                <!-- Browser Top Bar -->
+                <div class="bg-slate-200 px-4 py-3 border-b border-slate-300 flex items-center gap-3">
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                    </div>
+                    <div class="flex-grow bg-white px-4 py-1 rounded-full border border-slate-300 text-xs font-mono text-slate-600 flex items-center justify-between">
+                        <span id="simulatorUrl" class="truncate">C:/Project-HTML/index.html</span>
+                        <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded font-sans">Simulasi Browser</span>
+                    </div>
+                </div>
+
+                <!-- Live Render Container -->
+                <div class="p-8 min-h-[320px] bg-white text-slate-800" id="simulatorView">
+                    <!-- Dynamic Content Injected via JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==========================================
+             TAB 4: STUDI KASUS & SOAL LATIHAN
+             ========================================== -->
+        <section id="tab4" class="tab-content hidden space-y-8 animate-in fade-in duration-300">
+            
+            <!-- STUDI KASUS -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Skenario Pembelajaran
+                    </span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-2">Studi Kasus: Website Portofolio UMKM Digital</h2>
+                    <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                        Sebuah toko roti lokal bernama <strong>"Roti Lezat Pak Ahmad"</strong> ingin memiliki website sederhana. Mereka membutuhkan 2 halaman: Halaman Beranda (menampilkan nama toko, moto, dan produk unggulan) serta Halaman Kontak (menampilkan alamat dan biodata pemilik).
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-800 text-sm">📋 Persyaratan Teknis Website UMKM:</h4>
+                    <ul class="list-disc list-inside text-xs text-slate-600 space-y-2 leading-relaxed">
+                        <li>Gunakan <span class="tag-badge">&lt;h1&gt;</span> untuk nama toko di halaman utama.</li>
+                        <li>Gunakan <span class="tag-badge">&lt;mark&gt;</span> untuk menyorot kata promo atau harga diskon.</li>
+                        <li>Gunakan pemformatan <span class="tag-badge">&lt;b&gt;</span> dan <span class="tag-badge">&lt;i&gt;</span> pada nama varian roti (misal: istilah bahasa asing seperti <i>Croissant</i>).</li>
+                        <li>Buat Hyperlink yang menghubungkan <code>index.html</code> (Beranda) dan <code>kontak.html</code> (Halaman Kontak).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- KUIS INTERAKTIF -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Kuis Interaktif Pemahaman HTML</h2>
+                        <p class="text-xs text-slate-500">Pilih jawaban yang menurut Anda paling tepat untuk menguji pemahaman materi.</p>
+                    </div>
+                    <span id="quizScore" class="bg-indigo-100 text-indigo-700 font-bold px-4 py-2 rounded-xl text-xs">
+                        Skor: 0 / 4
+                    </span>
+                </div>
+
+                <!-- Question 1 -->
+                <div class="space-y-3">
+                    <p class="text-sm font-bold text-slate-800">1. Tag mana yang digunakan untuk membuat judul utama paling besar dalam dokumen HTML?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <button onclick="checkAnswer(1, 'A')" id="q1-a" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">A. &lt;head&gt;</button>
+                        <button onclick="checkAnswer(1, 'B')" id="q1-b" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">B. &lt;h1&gt;</button>
+                        <button onclick="checkAnswer(1, 'C')" id="q1-c" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">C. &lt;h6&gt;</button>
+                        <button onclick="checkAnswer(1, 'D')" id="q1-d" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">D. &lt;header&gt;</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="space-y-3 pt-4 border-t border-slate-100">
+                    <p class="text-sm font-bold text-slate-800">2. Atribut apa yang WAJIB ada pada tag &lt;a&gt; untuk menentukan lokasi halaman tujuan?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <button onclick="checkAnswer(2, 'A')" id="q2-a" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">A. src="..."</button>
+                        <button onclick="checkAnswer(2, 'B')" id="q2-b" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">B. link="..."</button>
+                        <button onclick="checkAnswer(2, 'C')" id="q2-c" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">C. href="..."</button>
+                        <button onclick="checkAnswer(2, 'D')" id="q2-d" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">D. target="..."</button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="space-y-3 pt-4 border-t border-slate-100">
+                    <p class="text-sm font-bold text-slate-800">3. Kombinasi tag yang tepat untuk membuat teks tebal, miring, dan bergaris bawah secara bersamaan adalah...</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <button onclick="checkAnswer(3, 'A')" id="q3-a" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">A. &lt;b&gt;&lt;i&gt;&lt;u&gt;Teks&lt;/u&gt;&lt;/i&gt;&lt;/b&gt;</button>
+                        <button onclick="checkAnswer(3, 'B')" id="q3-b" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">B. &lt;bold&gt;&lt;italic&gt;&lt;underline&gt;Teks&lt;/underline&gt;&lt;/italic&gt;&lt;/bold&gt;</button>
+                        <button onclick="checkAnswer(3, 'C')" id="q3-c" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">C. &lt;h1&gt;&lt;mark&gt;Teks&lt;/mark&gt;&lt;/h1&gt;</button>
+                        <button onclick="checkAnswer(3, 'D')" id="q3-d" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">D. &lt;p format="all"&gt;Teks&lt;/p&gt;</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="space-y-3 pt-4 border-t border-slate-100">
+                    <p class="text-sm font-bold text-slate-800">4. Tag &lt;mark&gt; dalam pemformatan teks berfungsi untuk...</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <button onclick="checkAnswer(4, 'A')" id="q4-a" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">A. Memotong teks</button>
+                        <button onclick="checkAnswer(4, 'B')" id="q4-b" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">B. Memberi garis pembatas horizontal</button>
+                        <button onclick="checkAnswer(4, 'C')" id="q4-c" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">C. Memberi warna latar stabilo kuning pada teks</button>
+                        <button onclick="checkAnswer(4, 'D')" id="q4-d" class="p-3 text-left rounded-xl border border-slate-200 hover:bg-slate-50">D. Membuka tab browser baru</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEMBAR KERJA PESERTA DIDIK (LKPD) -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <h2 class="text-xl font-bold text-slate-900">Lembar Kerja Peserta Didik (LKPD) - Tugas Praktik</h2>
+                    <p class="text-xs text-slate-500 mt-1">Gunakan panduan tugas ini untuk pengerjaan di laboratorium komputer.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Tugas Pertemuan 1 -->
+                    <div class="bg-amber-50/50 p-5 rounded-2xl border border-amber-200 space-y-3">
+                        <span class="bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">Tugas Pertemuan 1</span>
+                        <h4 class="font-bold text-amber-900 text-sm">Latihan Pemformatan Teks & Heading</h4>
+                        <ol class="list-decimal list-inside text-xs text-amber-800 space-y-1.5 leading-relaxed">
+                            <li>Buat file baru bernama <code>latihan1.html</code>.</li>
+                            <li>Tuliskan judul utama dengan <span class="tag-badge">&lt;h1&gt;</span> berisi nama lengkapmu.</li>
+                            <li>Tuliskan sub-judul dengan <span class="tag-badge">&lt;h2&gt;</span> tentang Cita-Cita.</li>
+                            <li>Buat 2 paragraf deskripsi singkat tentang dirimu.</li>
+                            <li>Pastikan ada minimal 1 kata tebal (<span class="tag-badge">&lt;b&gt;</span>), 1 kata miring (<span class="tag-badge">&lt;i&gt;</span>), dan 1 kata bersorotan (<span class="tag-badge">&lt;mark&gt;</span>).</li>
+                        </ol>
+                    </div>
+
+                    <!-- Tugas Pertemuan 2 -->
+                    <div class="bg-emerald-50/50 p-5 rounded-2xl border border-emerald-200 space-y-3">
+                        <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">Tugas Pertemuan 2</span>
+                        <h4 class="font-bold text-emerald-900 text-sm">Proyek Mini: Website 2 Halaman</h4>
+                        <ol class="list-decimal list-inside text-xs text-emerald-800 space-y-1.5 leading-relaxed">
+                            <li>Buat folder bernama <code>web-biodata</code> di komputermu.</li>
+                            <li>Di dalam folder tersebut, buat file <code>index.html</code> dan <code>hobi.html</code>.</li>
+                            <li>Pada <code>index.html</code>, buat menu link menuju <code>hobi.html</code>.</li>
+                            <li>Pada <code>hobi.html</code>, buat link navigasi untuk kembali ke <code>index.html</code>.</li>
+                            <li>Uji coba klik link di browser hingga berhasil berpindah halaman tanpa error 404!</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-semibold text-slate-300">Modul Interaktif Pemrograman Web Dasar - HTML (4 JP / 2 Pertemuan)</p>
+            <p class="text-slate-500">Dirancang untuk memudahkan penyampaian materi Informatika & Web Development Pemula.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // State Management
+        let currentTab = 'tab1';
+        let currentSimulatorPage = 'index';
+        let quizAnswers = { 1: null, 2: null, 3: null, 4: null };
+        const correctAnswers = { 1: 'B', 2: 'C', 3: 'A', 4: 'C' };
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+            currentTab = tabId;
+
+            // Render simulator if entering Tab 3
+            if (tabId === 'tab3') {
+                renderSimulator('index');
+            }
+        }
+
+        // Interactive Simulator Logic for Tab 3
+        function renderSimulator(page) {
+            currentSimulatorPage = page;
+            const view = document.getElementById('simulatorView');
+            const urlBar = document.getElementById('simulatorUrl');
+
+            if (page === 'index') {
+                urlBar.innerText = "C:/Project-HTML/index.html";
+                view.innerHTML = `
+                    <div class="space-y-4 animate-in fade-in">
+                        <h1 class="text-2xl font-bold text-slate-900">Selamat Datang di Website Saya</h1>
+                        <h3 class="text-lg font-medium text-slate-700">Portal Informasi Belajar HTML</h3>
+                        <hr class="border-slate-300">
+                        <p class="text-xs text-slate-600">
+                            <b>Navigasi:</b> 
+                            <span class="text-slate-400">Beranda</span> | 
+                            <span onclick="renderSimulator('profil')" class="text-indigo-600 font-bold underline cursor-pointer hover:text-indigo-800">
+                                Ke Halaman Profil Saya ➔
+                            </span>
+                        </p>
+                        <hr class="border-slate-300">
+                        <h2 class="text-xl font-bold text-slate-800">Pengenalan</h2>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Halo! Nama saya <b>Budi Santoso</b>. Saat ini saya sedang mempraktikkan <i>Pemrograman Web Dasar</i> khususnya tentang pemformatan teks dan pembuatan link.
+                        </p>
+                        <p class="text-sm text-slate-700">
+                            Materi ini <mark class="bg-amber-300 px-1 rounded-sm">sangat mudah dan menyenangkan</mark> untuk dipelajari!
+                        </p>
+                    </div>
+                `;
+            } else if (page === 'profil') {
+                urlBar.innerText = "C:/Project-HTML/profil.html";
+                view.innerHTML = `
+                    <div class="space-y-4 animate-in fade-in">
+                        <h1 class="text-2xl font-bold text-slate-900">Profil Lengkap Saya</h1>
+                        <hr class="border-slate-300">
+                        <p class="text-xs text-slate-600">
+                            <b>Navigasi:</b> 
+                            <span onclick="renderSimulator('index')" class="text-indigo-600 font-bold underline cursor-pointer hover:text-indigo-800">
+                                ⬅ Kembali ke Beranda
+                            </span> | 
+                            <span class="text-slate-400">Profil Saya</span>
+                        </p>
+                        <hr class="border-slate-300">
+                        <h2 class="text-xl font-bold text-slate-800">Biodata Diri</h2>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            <b>Nama:</b> Budi Santoso<br>
+                            <b>Hobi:</b> Koding, <i>Reading</i>, dan Musik.<br>
+                            <b>Cita-cita:</b> Menjadi <u>Web Developer Handal</u>.
+                        </p>
+                        <h3 class="text-base font-bold text-slate-800 pt-2">Link Favorit:</h3>
+                        <p class="text-sm">
+                            Kunjungi <a href="https://google.com" target="_blank" class="text-emerald-600 underline font-semibold">Google Search ↗</a>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // Quiz Logic
+        function checkAnswer(qNum, option) {
+            quizAnswers[qNum] = option;
+            const isCorrect = option === correctAnswers[qNum];
+            
+            // Reset options styling for this question
+            ['A', 'B', 'C', 'D'].forEach(opt => {
+                const btn = document.getElementById(`q${qNum}-${opt.toLowerCase()}`);
+                if (btn) {
+                    btn.classList.remove('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'bg-rose-100', 'border-rose-500', 'text-rose-900');
+                }
+            });
+
+            // Highlight chosen option
+            const selectedBtn = document.getElementById(`q${qNum}-${option.toLowerCase()}`);
+            if (isCorrect) {
+                selectedBtn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'font-bold');
+            } else {
+                selectedBtn.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900', 'font-bold');
+                // Highlight correct option
+                const correctBtn = document.getElementById(`q${qNum}-${correctAnswers[qNum].toLowerCase()}`);
+                correctBtn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+            }
+
+            // Calculate total score
+            let score = 0;
+            Object.keys(correctAnswers).forEach(num => {
+                if (quizAnswers[num] === correctAnswers[num]) {
+                    score += 1;
+                }
+            });
+
+            document.getElementById('quizScore').innerText = `Skor: ${score} / 4`;
+        }
+
+        // Initialize Simulator on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSimulator('index');
+        });
+    </script>
+</body>
+</html>
