@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Pembelajaran: Menyusun Tabel Data HTML</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-btn.active {
+            border-bottom: 3px solid #2563eb;
+            color: #2563eb;
+            font-weight: 700;
+            background-color: #eff6ff;
+        }
+        pre code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed min-h-screen flex flex-col">
+
+    <!-- Header & Navigation -->
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="bg-indigo-700 text-indigo-200 text-xs font-semibold px-2.5 py-1 rounded uppercase tracking-wider">Pemrograman Web Dasar</span>
+                <h1 class="text-2xl font-bold mt-1">Modul HTML Table Masterclass</h1>
+                <p class="text-xs text-indigo-200">Komponen Utama: &lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, dan &lt;td&gt;</p>
+            </div>
+            <div class="flex items-center gap-3 bg-indigo-800 px-4 py-2 rounded-lg border border-indigo-700 text-sm">
+                <div>
+                    <span class="block font-semibold text-indigo-100">Guru Mapel:</span>
+                    <span class="text-emerald-400 font-bold">Akhmad Noor Effendi, S.Kom</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation Bar -->
+        <div class="bg-white border-b border-slate-200 text-slate-600 shadow-inner">
+            <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto">
+                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active py-3 px-6 text-sm font-medium whitespace-nowrap transition-colors duration-150 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C20.832 18.477 19.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Pengertian & Fungsi
+                </button>
+                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn py-3 px-6 text-sm font-medium whitespace-nowrap transition-colors duration-150 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    Contoh Kode Per-Tag
+                </button>
+                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn py-3 px-6 text-sm font-medium whitespace-nowrap transition-colors duration-150 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    Demo Tabel Interaktif
+                </button>
+                <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn py-3 px-6 text-sm font-medium whitespace-nowrap transition-colors duration-150 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Soal Evaluasi & Studi Kasus
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-grow">
+
+        <!-- TAB 1: PENGERTIAN & FUNGSI DETAIL -->
+        <div id="tab1" class="tab-content block space-y-8">
+            <!-- Timeline Alokasi Waktu -->
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-lg shadow-sm">
+                <h3 class="text-lg font-bold text-indigo-900 mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Struktur Pelaksanaan Pembelajaran (4 JP × 2 Pertemuan = 360 Menit)
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4 mt-3 text-sm">
+                    <div class="bg-white p-4 rounded border border-indigo-100 shadow-sm">
+                        <span class="font-bold text-indigo-700 block mb-1">Pertemuan 1 (4 JP / 180 Menit): Konsep Dasar & Anatomy</span>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><strong>JP 1 (45m):</strong> Pengenalan struktur dasar HTML & Filosofi Tabel.</li>
+                            <li><strong>JP 2 (45m):</strong> Bedah fungsi tag `&lt;table&gt;` dan `&lt;tr&gt;`.</li>
+                            <li><strong>JP 3 (45m):</strong> Perbedaan mendalam `&lt;th&gt;` vs `&lt;td&gt;` dan Aksesibilitas.</li>
+                            <li><strong>JP 4 (45m):</strong> Latihan terbimbing membuat tabel sederhana 3x3.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded border border-indigo-100 shadow-sm">
+                        <span class="font-bold text-indigo-700 block mb-1">Pertemuan 2 (4 JP / 180 Menit): Penggabungan Sel & Evaluasi</span>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><strong>JP 1 (45m):</strong> Penguasaan Atribut `colspan` dan `rowspan`.</li>
+                            <li><strong>JP 2 (45m):</strong> Pengerjaan Studi Kasus Tabel Laporan Kompleks.</li>
+                            <li><strong>JP 3 (45m):</strong> Pengerjaan Quiz Evaluasi 15 Soal Pilihan Ganda.</li>
+                            <li><strong>JP 4 (45m):</strong> Review, Pembahasan, dan Refleksi Pembelajaran.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Material Teori Panjang -->
+            <article class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 border-b pb-3 mb-4">1. Pengertian Tabel Data dalam HTML</h2>
+                    <p class="text-slate-700 leading-relaxed mb-4">
+                        Dalam dunia pemrograman web, **Tabel Data (Data Table)** adalah elemen visual yang digunakan untuk menyajikan informasi terstruktur yang terdiri dari baris (*rows*) dan kolom (*columns*). Penggunaan tabel sangat ideal untuk data yang memiliki hubungan dua dimensi, seperti laporan keuangan, jadwal pelajaran, daftar inventaris barang, perbandingan spesifikasi produk, maupun rekapitulasi nilai siswa.
+                    </p>
+                    <p class="text-slate-700 leading-relaxed">
+                        Secara historis pada era HTML awal (HTML4), tabel sering disalahgunakan untuk merancang tata letak (*layout*) seluruh halaman web. Namun, pada standar **HTML5 modern**, tabel **hanya boleh digunakan untuk menyajikan data tabular**. Untuk tata letak web, pengembang wajib menggunakan elemen CSS Layout seperti Flexbox atau CSS Grid. Penggunaan tabel yang benar sangat krusial demi menjaga standar semantik web, optimasi SEO (Search Engine Optimization), dan aksesibilitas bagi pengguna dengan disabilitas (*screen reader*).
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 border-b pb-3 mb-4">2. Anatomi & Fungsi 4 Komponen Utama Tabel</h2>
+                    <p class="text-slate-700 mb-6">
+                        Penyusunan tabel HTML didasarkan pada tata susunan hirarki bertingkat. Berikut adalah penjelasan mendalam mengenai 4 elemen dasar pembentuk tabel:
+                    </p>
+
+                    <div class="space-y-6">
+                        <!-- Table Tag -->
+                        <div class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-blue-600 text-white font-mono font-bold px-3 py-1 rounded">&lt;table&gt;</span>
+                                <h3 class="text-lg font-bold text-slate-800">1. Tag &lt;table&gt; (Elemen Pembungkus Utama)</h3>
+                            </div>
+                            <p class="text-slate-600 text-sm mb-3">
+                                Tag <code class="bg-slate-200 px-1 rounded">&lt;table&gt;</code> bertindak sebagai kontainer paling luar (*outer envelope*) yang menandai awal dan akhir dari suatu blok tabel data pada dokumen HTML.
+                            </p>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li><strong>Fungsi Utama:</strong> Memberitahu browser bahwa semua elemen di dalamnya adalah bagian dari struktur tabel.</li>
+                                <li><strong>Atribut Terkait (Klasik vs Modern):</strong> Dahulu menggunakan atribut seperti <code class="text-pink-600">border="1"</code>, <code class="text-pink-600">cellpadding</code>, dan <code class="text-pink-600">cellspacing</code>. Di era modern, pengaturan visual ini sepenuhnya ditangani oleh CSS (<code class="text-indigo-600">border-collapse: collapse;</code>).</li>
+                                <li><strong>Kegunaan Relevan:</strong> Tanpa tag ini, browser tidak akan bisa merender baris dan sel secara terstruktur.</li>
+                            </ul>
+                        </div>
+
+                        <!-- TR Tag -->
+                        <div class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-emerald-600 text-white font-mono font-bold px-3 py-1 rounded">&lt;tr&gt;</span>
+                                <h3 class="text-lg font-bold text-slate-800">2. Tag &lt;tr&gt; (Table Row / Baris Tabel)</h3>
+                            </div>
+                            <p class="text-slate-600 text-sm mb-3">
+                                Singkatan dari *Table Row*. Tag ini digunakan untuk mendefinisikan sebuah **baris horizontal** dalam tabel.
+                            </p>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li><strong>Fungsi Utama:</strong> Menjadi wadah atau penampung bagi sel-sel data (<code class="text-indigo-600">&lt;td&gt;</code>) maupun sel kepala (<code class="text-indigo-600">&lt;th&gt;</code>) yang berderet secara horizontal.</li>
+                                <li><strong>Aturan Penting:</strong> Tag <code class="bg-slate-200 px-1 rounded">&lt;tr&gt;</code> tidak boleh langsung diisi dengan teks biasa. Teks wajib dibungkus di dalam <code class="bg-slate-200 px-1 rounded">&lt;th&gt;</code> atau <code class="bg-slate-200 px-1 rounded">&lt;td&gt;</code>.</li>
+                                <li><strong>Kegunaan Relevan:</strong> Jumlah tag <code class="bg-slate-200 px-1 rounded">&lt;tr&gt;</code> menentukan berapa banyak baris vertikal ke bawah yang dimiliki oleh tabel Anda.</li>
+                            </ul>
+                        </div>
+
+                        <!-- TH Tag -->
+                        <div class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-purple-600 text-white font-mono font-bold px-3 py-1 rounded">&lt;th&gt;</span>
+                                <h3 class="text-lg font-bold text-slate-800">3. Tag &lt;th&gt; (Table Header / Kepala Sel Tabel)</h3>
+                            </div>
+                            <p class="text-slate-600 text-sm mb-3">
+                                Singkatan dari *Table Header*. Tag ini digunakan untuk membuat sel judul atau kepala kolom/baris yang menjelaskan kategori data di bawahnya.
+                            </p>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li><strong>Karakteristik Visual Bawaan:</strong> Teks secara otomatis dicetak **Tebal (Bold)** dan posisinya berada di **Tengah Sel (Center Aligned)**.</li>
+                                <li><strong>Aksesibilitas & Semantik:</strong> Pembaca layar (*screen reader*) membaca atribut <code class="text-pink-600">scope="col"</code> atau <code class="text-pink-600">scope="row"</code> pada tag <code class="bg-slate-200 px-1 rounded">&lt;th&gt;</code> untuk membacakan konteks data kepada tunanetru.</li>
+                                <li><strong>Kegunaan Relevan:</strong> Diletakkan di baris paling atas (atau kolom paling kiri) sebagai petunjuk nama atribut data (misal: "No", "Nama Siswa", "Nilai").</li>
+                            </ul>
+                        </div>
+
+                        <!-- TD Tag -->
+                        <div class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-amber-600 text-white font-mono font-bold px-3 py-1 rounded">&lt;td&gt;</span>
+                                <h3 class="text-lg font-bold text-slate-800">4. Tag &lt;td&gt; (Table Data / Sel Data Tabel)</h3>
+                            </div>
+                            <p class="text-slate-600 text-sm mb-3">
+                                Singkatan dari *Table Data*. Tag ini merupakan sel standar yang menampung isi/nilai aktual dari tabel tersebut.
+                            </p>
+                            <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                                <li><strong>Karakteristik Visual Bawaan:</strong> Teks dicetak dengan ketebalan **Normal** dan posisinya rata **Kiri (Left Aligned)**.</li>
+                                <li><strong>Fleksibilitas Konten:</strong> Di dalam sel <code class="bg-slate-200 px-1 rounded">&lt;td&gt;</code>, Anda tidak hanya bisa memasukkan teks, tetapi juga gambar (<code class="text-indigo-600">&lt;img&gt;</code>), link (<code class="text-indigo-600">&lt;a&gt;</code>), tombol, bahkan tabel lain (*nested table*).</li>
+                                <li><strong>Kegunaan Relevan:</strong> Menyimpan nilai spesifik untuk setiap entitas baris dan kolom.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comparison Table -->
+                <section>
+                    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 mb-4">3. Perbandingan Mendalam: &lt;th&gt; vs &lt;td&gt;</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left border-collapse border border-slate-300">
+                            <thead class="bg-slate-100 text-slate-800">
+                                <tr>
+                                    <th class="border border-slate-300 p-3">Kriteria Perbandingan</th>
+                                    <th class="border border-slate-300 p-3 bg-purple-50 text-purple-900">Tag &lt;th&gt; (Table Header)</th>
+                                    <th class="border border-slate-300 p-3 bg-amber-50 text-amber-900">Tag &lt;td&gt; (Table Data)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-200">
+                                    <td class="border border-slate-300 p-3 font-semibold bg-slate-50">Tujuan Penggunaan</td>
+                                    <td class="border border-slate-300 p-3">Mendefinisikan Judul Kolom / Baris.</td>
+                                    <td class="border border-slate-300 p-3">Mendefinisikan Isi Data Aktual.</td>
+                                </tr>
+                                <tr class="border-b border-slate-200">
+                                    <td class="border border-slate-300 p-3 font-semibold bg-slate-50">Tampilan Default (Browser)</td>
+                                    <td class="border border-slate-300 p-3 text-purple-700 font-bold">Teks Tebal (Bold) & Rata Tengah (Center)</td>
+                                    <td class="border border-slate-300 p-3 text-amber-800">Teks Normal & Rata Kiri (Left)</td>
+                                </tr>
+                                <tr class="border-b border-slate-200">
+                                    <td class="border border-slate-300 p-3 font-semibold bg-slate-50">Posisi Umum</td>
+                                    <td class="border border-slate-300 p-3">Baris pertama tabel (<code class="text-indigo-600">&lt;thead&gt;</code>) atau kolom pertama.</td>
+                                    <td class="border border-slate-300 p-3">Baris-baris data (<code class="text-indigo-600">&lt;tbody&gt;</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-3 font-semibold bg-slate-50">Dampak SEO & Accessibility</td>
+                                    <td class="border border-slate-300 p-3">Sangat Tinggi (Membantu Screen Reader memahami konteks).</td>
+                                    <td class="border border-slate-300 p-3">Netral (Hanya berisi nilai data).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Advanced Concept: Span -->
+                <section>
+                    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 mb-4">4. Fitur Penggabungan Sel: Colspan dan Rowspan</h2>
+                    <p class="text-slate-700 mb-4">
+                        Dalam pembuatan tabel nyata, seringkali kita perlu menggabungkan beberapa sel menjadi satu. Hal ini dilakukan menggunakan dua atribut khusus yang dipasang pada tag <code class="bg-slate-200 px-1 rounded">&lt;th&gt;</code> atau <code class="bg-slate-200 px-1 rounded">&lt;td&gt;</code>:
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                            <h4 class="font-bold text-emerald-900 mb-1">colspan="jumlah_kolom"</h4>
+                            <p class="text-xs text-emerald-800">
+                                **Column Span:** Menggabungkan sel secara **Horizontal** (ke samping kanan). Nilai angka menentukan berapa kolom yang dilebur menjadi satu.
+                            </p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                            <h4 class="font-bold text-blue-900 mb-1">rowspan="jumlah_baris"</h4>
+                            <p class="text-xs text-blue-800">
+                                **Row Span:** Menggabungkan sel secara **Vertikal** (ke bawah). Nilai angka menentukan berapa baris yang dilebur menjadi satu.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+
+        <!-- TAB 2: CONTOH PENGERJAAN MASING-MASING TAG -->
+        <div id="tab2" class="tab-content hidden space-y-8">
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                <p class="text-sm text-amber-900 font-medium">
+                    💡 **Petunjuk Belajar:** Di bawah ini terdapat contoh sintaksis dasar potongan kode untuk masing-masing tag, diikuti oleh penjelasan cara kerjanya secara mendetail.
+                </p>
+            </div>
+
+            <!-- Example 1: Tag Table & TR -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 text-white px-6 py-3 flex justify-between items-center">
+                    <span class="font-mono text-sm text-emerald-400 font-semibold">1. Penggunaan Basic Tag &lt;table&gt; dan &lt;tr&gt;</span>
+                    <span class="text-xs bg-slate-700 px-2 py-1 rounded">Struktur Dasar</span>
+                </div>
+                <div class="p-6 grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 mb-2">Kode HTML:</h4>
+                        <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;!-- Mendefinisikan Wadah Tabel dengan Border --&gt;
+&lt;table border="1"&gt;
+  &lt;!-- Baris Pertama --&gt;
+  &lt;tr&gt;
+    &lt;!-- Isi sel diletakkan di sini --&gt;
+  &lt;/tr&gt;
+  &lt;!-- Baris Kedua --&gt;
+  &lt;tr&gt;
+    &lt;!-- Isi sel diletakkan di sini --&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                    </div>
+                    <div class="text-sm text-slate-600 space-y-2">
+                        <h4 class="font-bold text-slate-800">Penjelasan Kode:</h4>
+                        <p>1. Tag <code class="bg-slate-100 text-pink-600 px-1">&lt;table border="1"&gt;</code> membuka area tabel dan memberikan garis tepi selebar 1 piksel.</p>
+                        <p>2. Setiap pasang <code class="bg-slate-100 text-indigo-600 px-1">&lt;tr&gt;...&lt;/tr&gt;</code> merepresentasikan **satu baris baru** dari atas ke bawah.</p>
+                        <p>3. Kode di atas menyiapkan 2 baris kosong siap diisi sel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 2: Tag TH vs TD -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 text-white px-6 py-3 flex justify-between items-center">
+                    <span class="font-mono text-sm text-purple-400 font-semibold">2. Penerapan &lt;th&gt; untuk Judul dan &lt;td&gt; untuk Data</span>
+                    <span class="text-xs bg-slate-700 px-2 py-1 rounded">Isi Sel</span>
+                </div>
+                <div class="p-6 grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 mb-2">Kode HTML:</h4>
+                        <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;table border="1"&gt;
+  &lt;!-- Baris Header (Judul Kolom) --&gt;
+  &lt;tr&gt;
+    &lt;th&gt;NIM&lt;/th&gt;
+    &lt;th&gt;Nama Lengkap&lt;/th&gt;
+    &lt;th&gt;Jurusan&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;!-- Baris Data Pertama --&gt;
+  &lt;tr&gt;
+    &lt;td&gt;220101&lt;/td&gt;
+    &lt;td&gt;Budi Santoso&lt;/td&gt;
+    &lt;td&gt;Teknik Informatika&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                    </div>
+                    <div class="text-sm text-slate-600 space-y-2">
+                        <h4 class="font-bold text-slate-800">Penjelasan Kode:</h4>
+                        <p>1. Baris pertama berisi 3 buah tag <code class="bg-slate-100 text-purple-600 px-1">&lt;th&gt;</code>. Teks "NIM", "Nama Lengkap", dan "Jurusan" akan otomatis tebal dan di tengah.</p>
+                        <p>2. Baris kedua berisi 3 buah tag <code class="bg-slate-100 text-amber-600 px-1">&lt;td&gt;</code>. Teks "220101", "Budi Santoso", dan "Teknik Informatika" akan ditampilkan biasa rata kiri.</p>
+                        <p>3. Jumlah sel pada baris data harus sama dengan jumlah sel pada baris header agar tabel simetris.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 3: Colspan & Rowspan -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 text-white px-6 py-3 flex justify-between items-center">
+                    <span class="font-mono text-sm text-amber-400 font-semibold">3. Penerapan Atribut Penggabungan Sel (Colspan & Rowspan)</span>
+                    <span class="text-xs bg-slate-700 px-2 py-1 rounded">Advanced</span>
+                </div>
+                <div class="p-6 grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 mb-2">Kode HTML:</h4>
+                        <pre class="bg-slate-900 text-slate-100 p-4 rounded-lg text-xs overflow-x-auto"><code>&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;!-- Merentang 2 Kolom ke Samping --&gt;
+    &lt;th colspan="2"&gt;Nama Lengkap&lt;/th&gt;
+    &lt;th&gt;Nilai&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Ahmad&lt;/td&gt;
+    &lt;td&gt;Dhani&lt;/td&gt;
+    &lt;!-- Merentang 2 Baris ke Bawah --&gt;
+    &lt;td rowspan="2"&gt;A (Sempurna)&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Siti&lt;/td&gt;
+    &lt;td&gt;Nurhaliza&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                    </div>
+                    <div class="text-sm text-slate-600 space-y-2">
+                        <h4 class="font-bold text-slate-800">Penjelasan Kode:</h4>
+                        <p>1. <code class="bg-slate-100 text-indigo-600 px-1">&lt;th colspan="2"&gt;</code> menggabungkan kolom Nama Depan dan Nama Belakang di bawah satu header bernama "Nama Lengkap".</p>
+                        <p>2. <code class="bg-slate-100 text-indigo-600 px-1">&lt;td rowspan="2"&gt;</code> membuat sel nilai "A (Sempurna)" memanjang vertikal mencakup baris Ahmad dan baris Siti.</p>
+                        <p>3. **Perhatikan:** Pada baris ketiga, kita hanya menuliskan 2 sel <code class="bg-slate-100 text-amber-600 px-1">&lt;td&gt;</code> karena sel ketiga sudah "dimakan" oleh <code class="text-indigo-600">rowspan="2"</code> dari baris sebelumnya.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: CONTOH GABUNGAN LENGKAP & HASIL INTERAKTIF -->
+        <div id="tab3" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-6 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Demonstrasi Integrasi Semua Tag HTML Table</h2>
+                        <p class="text-sm text-slate-500">Mengkombinasikan &lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;, colspan, rowspan, dan Tailwind CSS Styling.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleView('preview')" id="btn-view-preview" class="px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow-sm">Tampilan Render (Live)</button>
+                        <button onclick="toggleView('code')" id="btn-view-code" class="px-4 py-2 text-xs font-bold rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300">Kode Lengkap HTML</button>
+                    </div>
+                </div>
+
+                <!-- Live Rendered Preview Mode -->
+                <div id="view-preview" class="space-y-6">
+                    <!-- Interactive Filter Bar -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center bg-slate-50 p-4 rounded-lg border border-slate-200 gap-3">
+                        <div class="w-full sm:w-auto flex items-center gap-2">
+                            <span class="text-xs font-semibold text-slate-600">Filter Jurusan:</span>
+                            <select id="filterJurusan" onchange="filterTable()" class="text-xs border border-slate-300 rounded px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option value="all">Semua Jurusan</option>
+                                <option value="RPL">Rekayasa Perangkat Lunak (RPL)</option>
+                                <option value="TKJ">Teknik Komputer Jaringan (TKJ)</option>
+                            </select>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono">Tabel Interaktif (Klik/Hover untuk Responsivitas)</span>
+                    </div>
+
+                    <!-- Rendered Table -->
+                    <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
+                        <table class="w-full text-sm text-left border-collapse" id="interactiveTable">
+                            <thead class="bg-indigo-900 text-white uppercase text-xs tracking-wider">
+                                <tr>
+                                    <th rowspan="2" class="border border-indigo-800 p-3 text-center">No</th>
+                                    <th rowspan="2" class="border border-indigo-800 p-3">NIM</th>
+                                    <th rowspan="2" class="border border-indigo-800 p-3">Nama Siswa</th>
+                                    <th rowspan="2" class="border border-indigo-800 p-3">Jurusan</th>
+                                    <th colspan="2" class="border border-indigo-800 p-3 text-center">Nilai Evaluasi</th>
+                                    <th rowspan="2" class="border border-indigo-800 p-3 text-center">Status Lulus</th>
+                                </tr>
+                                <tr>
+                                    <th class="border border-indigo-800 p-2 text-center bg-indigo-800">Teori</th>
+                                    <th class="border border-indigo-800 p-2 text-center bg-indigo-800">Praktikum</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <!-- Row 1 -->
+                                <tr class="data-row hover:bg-indigo-50 transition-colors" data-jurusan="RPL">
+                                    <td class="border border-slate-200 p-3 text-center font-mono">1</td>
+                                    <td class="border border-slate-200 p-3 font-mono text-slate-600">2026001</td>
+                                    <td class="border border-slate-200 p-3 font-semibold text-slate-800">Aditya Pratama</td>
+                                    <td class="border border-slate-200 p-3">RPL</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">88</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">92</td>
+                                    <td class="border border-slate-200 p-3 text-center">
+                                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full">LULUS</span>
+                                    </td>
+                                </tr>
+                                <!-- Row 2 -->
+                                <tr class="data-row hover:bg-indigo-50 transition-colors" data-jurusan="TKJ">
+                                    <td class="border border-slate-200 p-3 text-center font-mono">2</td>
+                                    <td class="border border-slate-200 p-3 font-mono text-slate-600">2026002</td>
+                                    <td class="border border-slate-200 p-3 font-semibold text-slate-800">Bella Safira</td>
+                                    <td class="border border-slate-200 p-3">TKJ</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">75</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">80</td>
+                                    <td class="border border-slate-200 p-3 text-center">
+                                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full">LULUS</span>
+                                    </td>
+                                </tr>
+                                <!-- Row 3 -->
+                                <tr class="data-row hover:bg-indigo-50 transition-colors" data-jurusan="RPL">
+                                    <td class="border border-slate-200 p-3 text-center font-mono">3</td>
+                                    <td class="border border-slate-200 p-3 font-mono text-slate-600">2026003</td>
+                                    <td class="border border-slate-200 p-3 font-semibold text-slate-800">Citra Kirana</td>
+                                    <td class="border border-slate-200 p-3">RPL</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">95</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">98</td>
+                                    <td class="border border-slate-200 p-3 text-center">
+                                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full">LULUS</span>
+                                    </td>
+                                </tr>
+                                <!-- Row 4 -->
+                                <tr class="data-row hover:bg-indigo-50 transition-colors" data-jurusan="TKJ">
+                                    <td class="border border-slate-200 p-3 text-center font-mono">4</td>
+                                    <td class="border border-slate-200 p-3 font-mono text-slate-600">2026004</td>
+                                    <td class="border border-slate-200 p-3 font-semibold text-slate-800">Doni Setiawan</td>
+                                    <td class="border border-slate-200 p-3">TKJ</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">60</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono">65</td>
+                                    <td class="border border-slate-200 p-3 text-center">
+                                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-0.5 rounded-full">REMIDIAL</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!-- Table Footer -->
+                            <tfoot class="bg-slate-100 font-bold text-slate-800">
+                                <tr>
+                                    <td colspan="4" class="border border-slate-200 p-3 text-right">Rata-Rata Nilai Klasikal:</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono text-indigo-700">79.5</td>
+                                    <td class="border border-slate-200 p-3 text-center font-mono text-indigo-700">83.75</td>
+                                    <td class="border border-slate-200 p-3 text-center text-xs text-slate-500">Tingkat Kelulusan: 75%</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Code View Mode (Hidden by default) -->
+                <div id="view-code" class="hidden">
+                    <pre class="bg-slate-900 text-slate-100 p-6 rounded-lg text-xs leading-relaxed overflow-x-auto"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;title&gt;Tabel Rekapitulasi Nilai Siswa&lt;/title&gt;
+    &lt;style&gt;
+        table { width: 100%; border-collapse: collapse; font-family: sans-serif; }
+        th, td { border: 1px solid #cbd5e1; padding: 12px; }
+        th { background-color: #1e1b4b; color: white; text-align: center; }
+        .sub-header { background-color: #3730a3; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        tr:hover { background-color: #e0e7ff; }
+        .lulus { background-color: #d1fae5; color: #065f46; border-radius: 12px; padding: 2px 8px; font-weight: bold; }
+        .remidial { background-color: #ffe4e6; color: #9f1239; border-radius: 12px; padding: 2px 8px; font-weight: bold; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th rowspan="2"&gt;No&lt;/th&gt;
+        &lt;th rowspan="2"&gt;NIM&lt;/th&gt;
+        &lt;th rowspan="2"&gt;Nama Siswa&lt;/th&gt;
+        &lt;th rowspan="2"&gt;Jurusan&lt;/th&gt;
+        &lt;th colspan="2"&gt;Nilai Evaluasi&lt;/th&gt;
+        &lt;th rowspan="2"&gt;Status Lulus&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th class="sub-header"&gt;Teori&lt;/th&gt;
+        &lt;th class="sub-header"&gt;Praktikum&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style="text-align: center;"&gt;1&lt;/td&gt;
+        &lt;td&gt;2026001&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;Aditya Pratama&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;RPL&lt;/td&gt;
+        &lt;td style="text-align: center;"&gt;88&lt;/td&gt;
+        &lt;td style="text-align: center;"&gt;92&lt;/td&gt;
+        &lt;td style="text-align: center;"&gt;&lt;span class="lulus"&gt;LULUS&lt;/span&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;!-- Baris data lainnya... --&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+      &lt;tr&gt;
+        &lt;td colspan="4" style="text-align: right;&gt;&lt;b&gt;Rata-Rata Nilai Klasikal:&lt;/b&gt;&lt;/td&gt;
+        &lt;td style="text-align: center;"&gt;&lt;b&gt;79.5&lt;/b&gt;&lt;/td&gt;
+        &lt;td style="text-align: center;"&gt;&lt;b&gt;83.75&lt;/b&gt;&lt;/td&gt;
+        &lt;td style="text-align: center;"&gt;Tingkat Kelulusan: 75%&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tfoot&gt;
+  &lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: STUDY KASUS, SOAL PG (15 ITEM) & TUGAS SISWA -->
+        <div id="tab4" class="tab-content hidden space-y-8">
+            
+            <!-- Section A: 15 Soal Pilihan Ganda -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Uji Pemahaman: 15 Soal Pilihan Ganda</h2>
+                        <p class="text-sm text-slate-500">Kerjakan soal di bawah ini untuk mengukur tingkat pemahaman materi tabel HTML Anda.</p>
+                    </div>
+                    <div id="quiz-score-badge" class="mt-3 md:mt-0 bg-indigo-50 border border-indigo-200 px-4 py-2 rounded-lg text-sm text-indigo-900 font-bold hidden">
+                        Skor Anda: <span id="user-score" class="text-indigo-600 text-lg">0</span> / 100
+                    </div>
+                </div>
+
+                <form id="quiz-form" class="space-y-6">
+                    <!-- Soal 1 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">1. Tag HTML manakah yang berfungsi sebagai kontainer utama untuk membungkus seluruh elemen tabel?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q1" value="A"> A. &lt;tr&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q1" value="B"> B. &lt;table&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q1" value="C"> C. &lt;td&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q1" value="D"> D. &lt;th&gt;</label>
+                        </div>
+                        <div id="exp-q1" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 2 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">2. Singkatan dari apakah tag &lt;tr&gt; dalam dokumen HTML?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q2" value="A"> A. Table Row</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q2" value="B"> B. Table Record</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q2" value="C"> C. Table Real</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q2" value="D"> D. Tab Row</label>
+                        </div>
+                        <div id="exp-q2" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 3 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">3. Karakteristik tampilan default bawaan browser untuk teks di dalam tag &lt;th&gt; adalah...</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q3" value="A"> A. Miring dan rata kiri</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q3" value="B"> B. Biasa dan rata kanan</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q3" value="C"> C. Tebal dan rata tengah</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q3" value="D"> D. Garis bawah dan rata kiri</label>
+                        </div>
+                        <div id="exp-q3" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 4 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">4. Tag yang digunakan untuk mengisikan data/informasi sel biasa dalam tabel dinamakan...</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q4" value="A"> A. &lt;td&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q4" value="B"> B. &lt;th&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q4" value="C"> C. &lt;tr&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q4" value="D"> D. &lt;tf&gt;</label>
+                        </div>
+                        <div id="exp-q4" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 5 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">5. Atribut yang digunakan untuk menggabungkan dua atau lebih kolom secara HORIZONTAL adalah...</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q5" value="A"> A. rowspan</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q5" value="B"> B. colspan</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q5" value="C"> C. merge</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q5" value="D"> D. span</label>
+                        </div>
+                        <div id="exp-q5" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 6 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">6. Jika kita ingin menggabungkan 3 baris secara VERTIKAL ke bawah, atribut yang harus ditulis adalah...</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q6" value="A"> A. colspan="3"</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q6" value="B"> B. rowspan="3"</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q6" value="C"> C. row-merge="3"</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q6" value="D"> D. height="3"</label>
+                        </div>
+                        <div id="exp-q6" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 7 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">7. Manakah urutan hirarki struktur tabel HTML yang benar dari luar ke dalam?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q7" value="A"> A. &lt;tr&gt; &rarr; &lt;table&gt; &rarr; &lt;td&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q7" value="B"> B. &lt;table&gt; &rarr; &lt;tr&gt; &rarr; &lt;td&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q7" value="C"> C. &lt;td&gt; &rarr; &lt;tr&gt; &rarr; &lt;table&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q7" value="D"> D. &lt;table&gt; &rarr; &lt;td&gt; &rarr; &lt;tr&gt;</label>
+                        </div>
+                        <div id="exp-q7" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 8 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">8. Pada standar HTML5 modern, penggunaan tabel diperuntukkan KHUSUS untuk...</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q8" value="A"> A. Membuat layout seluruh halaman web</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q8" value="B"> B. Menampilkan data tabular terstruktur</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q8" value="C"> C. Mengatur posisi menu navigasi</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q8" value="D"> D. Memasukkan gambar galeri</label>
+                        </div>
+                        <div id="exp-q8" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 9 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">9. Jika sebuah tabel memiliki 4 tag &lt;tr&gt; dan di dalam setiap &lt;tr&gt; terdapat 3 tag &lt;td&gt;, berapa jumlah total sel data dalam tabel tersebut?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q9" value="A"> A. 7 sel</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q9" value="B"> B. 12 sel</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q9" value="C"> C. 4 sel</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q9" value="D"> D. 3 sel</label>
+                        </div>
+                        <div id="exp-q9" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 10 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">10. Apa fungsi dari atribut scope="col" yang sering dipasangkan pada tag &lt;th&gt;?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q10" value="A"> A. Memberikan warna pada kolom</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q10" value="B"> B. Menegaskan ke screen reader bahwa sel header berlaku untuk seluruh kolom di bawahnya</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q10" value="C"> C. Mengubah ukuran font kolom</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q10" value="D"> D. Mengunci kolom agar tidak bisa di-scroll</label>
+                        </div>
+                        <div id="exp-q10" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 11 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">11. Apa akibatnya jika kita menggunakan rowspan="2" pada sebuah sel, namun tidak mengurangi jumlah &lt;td&gt; di baris berikutnya?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q11" value="A"> A. Tabel akan terhapus otomatis</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q11" value="B"> B. Tampilan tabel akan bergeser (rancak/berantakan) karena kelebihan sel</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q11" value="C"> C. Browser menampilkan error halaman hitam</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q11" value="D"> D. Tidak terjadi perubahan apapun</label>
+                        </div>
+                        <div id="exp-q11" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 12 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">12. Elemen HTML apa saja yang diperbolehkan dimasukkan ke dalam sel &lt;td&gt;?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q12" value="A"> A. Hanya teks polos saja</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q12" value="B"> B. Teks, gambar (&lt;img&gt;), link (&lt;a&gt;), tombol, hingga tabel lain</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q12" value="C"> C. Hanya angka saja</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q12" value="D"> D. Hanya tag &lt;p&gt; saja</label>
+                        </div>
+                        <div id="exp-q12" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 13 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">13. Properti CSS apa yang digunakan untuk menghilangkan celah/jarak ganda antar garis tepi sel tabel?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q13" value="A"> A. border-collapse: collapse;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q13" value="B"> B. border-spacing: 10px;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q13" value="C"> C. text-align: center;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q13" value="D"> D. grid-gap: zero;</label>
+                        </div>
+                        <div id="exp-q13" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 14 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">14. Tag pembantu semantik mana yang digunakan khusus membungkus baris header paling atas tabel?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q14" value="A"> A. &lt;tbody&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q14" value="B"> B. &lt;tfoot&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q14" value="C"> C. &lt;thead&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q14" value="D"> D. &lt;header&gt;</label>
+                        </div>
+                        <div id="exp-q14" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <!-- Soal 15 -->
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">15. Apabila Anda ingin menambahkan baris ringkasan total di bagian paling bawah tabel, tag semantik mana yang paling relevan?</p>
+                        <div class="space-y-1 text-xs text-slate-700">
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q15" value="A"> A. &lt;tfoot&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q15" value="B"> B. &lt;thead&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q15" value="C"> C. &lt;bottom&gt;</label>
+                            <label class="flex items-center gap-2 p-2 rounded hover:bg-white cursor-pointer"><input type="radio" name="q15" value="D"> D. &lt;summary&gt;</label>
+                        </div>
+                        <div id="exp-q15" class="text-xs p-2 rounded hidden font-medium"></div>
+                    </div>
+
+                    <button type="button" onclick="checkQuiz()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition-colors text-sm">
+                        Periksa Jawaban & Hitung Skor
+                    </button>
+                </form>
+            </div>
+
+            <!-- Section B: Studi Kasus & Penugasan Murid -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 border-b pb-3 mb-2">Penugasan Praktikum Mandiri (Studi Kasus Siswa)</h2>
+                    <p class="text-xs text-slate-500">Kerjakan 3 tugas proyek tabel berikut di text editor (VS Code / Notepad) dan kumpulkan file HTML Anda.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Task 1 -->
+                    <div class="border border-slate-200 rounded-lg p-5 bg-indigo-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">Studi Kasus 1</span>
+                            <h3 class="font-bold text-slate-800 text-base mt-2 mb-2">Jadwal Pelajaran Mingguan</h3>
+                            <p class="text-xs text-slate-600 mb-3">
+                                Buatlah file <code class="bg-white px-1 border rounded">jadwal.html</code> yang menampilkan jadwal sekolah dari Hari Senin hingga Jumat.
+                            </p>
+                            <ul class="text-xs text-slate-600 list-disc list-inside space-y-1 mb-4">
+                                <li>Gunakan <code class="text-indigo-600">&lt;th&gt;</code> untuk nama Hari dan Jam Pelajaran.</li>
+                                <li>Gunakan <code class="text-indigo-600">colspan</code> untuk sel **ISTIRAHAT** yang memanjang horizontal di tengah jam.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-3 rounded border text-[11px] text-slate-500 font-mono">
+                            Target Kompetensi: Pemahaman dasar &lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;, dan Colspan sederhana.
+                        </div>
+                    </div>
+
+                    <!-- Task 2 -->
+                    <div class="border border-slate-200 rounded-lg p-5 bg-emerald-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">Studi Kasus 2</span>
+                            <h3 class="font-bold text-slate-800 text-base mt-2 mb-2">Laporan Penjualan Toko</h3>
+                            <p class="text-xs text-slate-600 mb-3">
+                                Buatlah file <code class="bg-white px-1 border rounded">penjualan.html</code> rekap penjualan elektronik bulanan.
+                            </p>
+                            <ul class="text-xs text-slate-600 list-disc list-inside space-y-1 mb-4">
+                                <li>Kolom: No, Kode Barang, Nama Barang, Kategori, Harga, Jumlah Terjual, Total.</li>
+                                <li>Gunakan <code class="text-indigo-600">rowspan</code> untuk menggabungkan nama Kategori barang yang sama.</li>
+                                <li>Gunakan <code class="text-indigo-600">colspan</code> di baris paling bawah untuk menghitung **Grand Total Penjualan**.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-3 rounded border text-[11px] text-slate-500 font-mono">
+                            Target Kompetensi: Kombinasi Colspan dan Rowspan pada tabel finansial kompleks.
+                        </div>
+                    </div>
+
+                    <!-- Task 3 -->
+                    <div class="border border-slate-200 rounded-lg p-5 bg-purple-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">Studi Kasus 3 (Tantangan)</span>
+                            <h3 class="font-bold text-slate-800 text-base mt-2 mb-2">Transkrip Nilai Berwarna</h3>
+                            <p class="text-xs text-slate-600 mb-3">
+                                Buatlah file <code class="bg-white px-1 border rounded">transkrip.html</code> dengan struktur semantik lengkap (<code class="text-purple-600">&lt;thead&gt;</code>, <code class="text-purple-600">&lt;tbody&gt;</code>, <code class="text-purple-600">&lt;tfoot&gt;</code>).
+                            </p>
+                            <ul class="text-xs text-slate-600 list-disc list-inside space-y-1 mb-4">
+                                <li>Header bertingkat (Header Mata Pelajaran membawahi Nilai Tugas, UTS, UAS).</li>
+                                <li>Berikan warna latar (*zebra striping*) berselang-seling pada baris menggunakan CSS.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-3 rounded border text-[11px] text-slate-500 font-mono">
+                            Target Kompetensi: Semantik HTML5 + Integrasi Estetika CSS Modern.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-6 text-xs border-t border-slate-800 mt-auto">
+        <p>&copy; Modul Pembelajaran Pemrograman Web - Menyusun Tabel Data HTML (&lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;)</p>
+        <p class="text-slate-500 mt-1">Dirancang untuk 2 Pertemuan × 4 JP (180 Menit / Pertemuan)</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // Toggle Preview / Code in Tab 3
+        function toggleView(mode) {
+            const previewEl = document.getElementById('view-preview');
+            const codeEl = document.getElementById('view-code');
+            const btnPreview = document.getElementById('btn-view-preview');
+            const btnCode = document.getElementById('btn-view-code');
+
+            if (mode === 'preview') {
+                previewEl.classList.remove('hidden');
+                codeEl.classList.add('hidden');
+                btnPreview.className = "px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow-sm";
+                btnCode.className = "px-4 py-2 text-xs font-bold rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300";
+            } else {
+                previewEl.classList.add('hidden');
+                codeEl.classList.remove('hidden');
+                btnCode.className = "px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow-sm";
+                btnPreview.className = "px-4 py-2 text-xs font-bold rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300";
+            }
+        }
+
+        // Filter Table Functionality in Tab 3
+        function filterTable() {
+            const filterValue = document.getElementById('filterJurusan').value;
+            const rows = document.querySelectorAll('#interactiveTable .data-row');
+
+            rows.forEach(row => {
+                const jurusan = row.getAttribute('data-jurusan');
+                if (filterValue === 'all' || jurusan === filterValue) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Quiz Evaluation Engine for Tab 4
+        const answersKey = {
+            q1: { ans: "B", exp: "Jawaban Benar: B. Tag <table> adalah kontainer utama yang membungkus seluruh elemen tabel." },
+            q2: { ans: "A", exp: "Jawaban Benar: A. <tr border> singkatan dari Table Row (Baris Tabel)." },
+            q3: { ans: "C", exp: "Jawaban Benar: C. Tag <th> secara default mencetak teks Tebal (Bold) dan Rata Tengah." },
+            q4: { ans: "A", exp: "Jawaban Benar: A. Tag <td> singkatan dari Table Data untuk sel biasa." },
+            q5: { ans: "B", exp: "Jawaban Benar: B. colspan singkatan dari Column Span (menggabungkan kolom horizontal)." },
+            q6: { ans: "B", exp: "Jawaban Benar: B. rowspan=\"3\" memanjangkan sel secara vertikal melewati 3 baris." },
+            q7: { ans: "B", exp: "Jawaban Benar: B. Hirarki yang benar: <table> merekap <tr>, lalu <tr> merekap <td> atau <th>." },
+            q8: { ans: "B", exp: "Jawaban Benar: B. Di standar modern, tabel hanya boleh dipakai untuk data tabular." },
+            q9: { ans: "B", exp: "Jawaban Benar: B. 4 baris × 3 sel = 12 total sel data." },
+            q10: { ans: "B", exp: "Jawaban Benar: B. scope=\"col\" memperjelas aksesibilitas untuk screen reader." },
+            q11: { ans: "B", exp: "Jawaban Benar: B. Sel pada baris bawah akan terdorong ke kanan sehingga layout bergeser/rusak." },
+            q12: { ans: "B", exp: "Jawaban Benar: B. Sel <td> sangat fleksibel, bisa berisi teks, media, link, hingga tabel bersarang." },
+            q13: { ans: "A", exp: "Jawaban Benar: A. border-collapse: collapse; meleburkan border ganda menjadi single border." },
+            q14: { ans: "C", exp: "Jawaban Benar: C. Tag <thead> digunakan membungkus grup baris kepala tabel." },
+            q15: { ans: "A", exp: "Jawaban Benar: A. Tag <tfoot> digunakan membungkus baris ringkasan/total di bagian bawah." }
+        };
+
+        function checkQuiz() {
+            let correctCount = 0;
+            const totalQuestions = 15;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qName = 'q' + i;
+                const selected = document.querySelector(`input[name="${qName}"]:checked`);
+                const expEl = document.getElementById(`exp-${qName}`);
+                
+                expEl.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+                if (selected && selected.value === answersKey[qName].ans) {
+                    correctCount++;
+                    expEl.classList.add('bg-emerald-100', 'text-emerald-800');
+                    expEl.innerText = "✓ " + answersKey[qName].exp;
+                } else {
+                    expEl.classList.add('bg-rose-100', 'text-rose-800');
+                    expEl.innerText = "✗ " + answersKey[qName].exp;
+                }
+            }
+
+            const finalScore = Math.round((correctCount / totalQuestions) * 100);
+            const scoreBadge = document.getElementById('quiz-score-badge');
+            const userScoreEl = document.getElementById('user-score');
+
+            scoreBadge.classList.remove('hidden');
+            userScoreEl.innerText = finalScore;
+
+            // Scroll to top of section for visibility
+            scoreBadge.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
