@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Pembelajaran: Modifikasi Tabel HTML (Colspan & Rowspan)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tab-btn.active {
+            border-bottom-color: #2563eb;
+            color: #2563eb;
+            background-color: #eff6ff;
+            font-weight: 600;
+        }
+        .highlight-colspan {
+            background-color: #dbeafe !important;
+            border: 2px dashed #2563eb !important;
+        }
+        .highlight-rowspan {
+            background-color: #dcfce7 !important;
+            border: 2px dashed #16a34a !important;
+        }
+        .highlight-combo {
+            background-color: #fef3c7 !important;
+            border: 2px dashed #d97706 !important;
+        }
+        pre code {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white py-8 px-4 shadow-lg">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <span class="bg-blue-500/30 text-blue-100 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-blue-400/30">
+                        Materi Pemrograman Web Dasar
+                    </span>
+                    <h1 class="text-3xl md:text-4xl font-extrabold mt-2 tracking-tight">
+                        Menguasai Modifikasi Tabel HTML: <span class="text-yellow-300">Colspan</span> & <span class="text-green-300">Rowspan</span>
+                    </h1>
+                    <p class="text-blue-100 mt-2 text-sm md:text-base max-w-3xl">
+                        Guru Mapel : Akhmad Noor Effendi, S.Kom
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-xs space-y-1">
+                    <p><i class="fa-regular fa-clock mr-2"></i><strong>Alokasi Waktu:</strong> 2 x 4 JP (180 Menit / Pertemuan)</p>
+                    <p><i class="fa-solid fa-layer-group mr-2"></i><strong>Target Pembelajaran:</strong> Siswa SMK / S1 Informatika</p>
+                    <p><i class="fa-solid fa-code mr-2"></i><strong>Prasyarat:</strong> HTML Basic (`table`, `tr`, `td`, `th`)</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation Tabs -->
+    <div class="sticky top-0 z-50 bg-white shadow-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto flex overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active px-6 py-4 text-sm font-medium text-slate-600 border-b-4 border-transparent hover:text-blue-600 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-book-open"></i> Pengertian & Konsep Dasar
+            </button>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn px-6 py-4 text-sm font-medium text-slate-600 border-b-4 border-transparent hover:text-blue-600 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-cubes"></i> Contoh Pengerjaan Spasial
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn px-6 py-4 text-sm font-medium text-slate-600 border-b-4 border-transparent hover:text-blue-600 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-table-cells"></i> Tabel Kompleks & Hasil Interaktif
+            </button>
+            <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn px-6 py-4 text-sm font-medium text-slate-600 border-b-4 border-transparent hover:text-blue-600 transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-pen-to-square"></i> Evaluasi & Studi Kasus
+            </button>
+        </div>
+    </div>
+
+    <!-- Content Container -->
+    <main class="max-w-7xl mx-auto p-4 md:p-6 my-6">
+
+        <!-- TAB 1: PENGERTIAN & KONSEP DASAR -->
+        <section id="tab1" class="tab-content space-y-8">
+            <!-- Rencana Pembelajaran Info Card -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6 shadow-sm">
+                <h2 class="text-xl font-bold text-blue-900 flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-calendar-days text-blue-600"></i> Struktur Rencana Pembelajaran (2 Pertemuan x 4 JP)
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-blue-800 text-lg">Pertemuan 1 (180 Menit)</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs px-2.5 py-1 rounded-full font-semibold">4 JP</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-3">Fokus: Anatomi Tabel HTML & Penggabungan Kolom Horizontal (Colspan)</p>
+                        <ul class="text-sm space-y-2 text-slate-700">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Review elemen `table`, `tr`, `th`, dan `td` (30 Menit)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Pengenalan Atribut `colspan` & Cara Menghitung Grid (45 Menit)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Praktik Terbimbing: Membuat Header Tabel Rekap (45 Menit)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Latihan Mandiri & Feedback Langsung (60 Menit)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-blue-100 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-purple-800 text-lg">Pertemuan 2 (180 Menit)</span>
+                            <span class="bg-purple-100 text-purple-700 text-xs px-2.5 py-1 rounded-full font-semibold">4 JP</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-3">Fokus: Penggabungan Baris Vertikal (Rowspan) & Kombinasi Kompleks</p>
+                        <ul class="text-sm space-y-2 text-slate-700">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Konsep `rowspan` & Logika "Cell Shifting" (45 Menit)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Penggabungan Kombinasi `colspan` + `rowspan` (45 Menit)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Pengetesan Evaluasi 15 Soal Pilihan Ganda (40 Menit)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> Penyelesaian Studi Kasus Mandiri (50 Menit)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Penjelasan Mendalam -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <h2 class="text-2xl font-bold text-slate-900 border-b pb-4">
+                    1. Pengertian Lengkap Modifikasi Sel Tabel HTML
+                </h2>
+
+                <p class="text-slate-700 leading-relaxed">
+                    Secara default, tabel dalam HTML dirender sebagai **matriks kisi (grid)** standar berbentuk $N \times M$ kaku, di mana setiap baris (`<tr>`) memiliki jumlah sel (`<td>` atau `<th>`) yang persis sama. Namun, dalam aplikasi dunia nyata seperti laporan keuangan, jadwal pelajaran, faktur belanja, dan kartu hasil studi, struktur data sering kali membutuhkan sel yang melintasi beberapa kolom atau baris sekaligus.
+                </p>
+
+                <p class="text-slate-700 leading-relaxed">
+                    Untuk mengubah perilaku grid standar ini, HTML menyediakan dua atribut khusus pada elemen sel (`<td>` dan `<th>`), yaitu **`colspan`** dan **`rowspan`**.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 my-6">
+                    <!-- Card Colspan -->
+                    <div class="bg-blue-50/60 border-l-4 border-blue-600 p-5 rounded-r-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-blue-600 text-white font-bold px-3 py-1 rounded text-xs">COLSPAN</span>
+                            <h3 class="text-lg font-bold text-blue-950">Column Span (Menggabungkan Kolom)</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 mb-3">
+                            Atribut <code class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded">colspan</code> digunakan untuk memperluas cakupan satu sel secara <strong>HORIZONTAL</strong> dari kiri ke kanan melintasi dua atau lebih kolom.
+                        </p>
+                        <div class="text-xs bg-white p-3 rounded border border-blue-200 text-slate-600 space-y-1">
+                            <p><strong>Sintaks:</strong> <code class="text-blue-600">&lt;td colspan="jumlah_kolom"&gt;</code></p>
+                            <p><strong>Efek:</strong> Mengisi nilai $N$ kolom horizontal. Membutuhkan penghapusan $N-1$ tag `<td>` berikutnya pada baris yang sama agar tidak merusak tata letak tabel.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Rowspan -->
+                    <div class="bg-green-50/60 border-l-4 border-green-600 p-5 rounded-r-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-green-600 text-white font-bold px-3 py-1 rounded text-xs">ROWSPAN</span>
+                            <h3 class="text-lg font-bold text-green-950">Row Span (Menggabungkan Baris)</h3>
+                        </div>
+                        <p class="text-sm text-slate-700 mb-3">
+                            Atribut <code class="bg-green-100 text-green-800 px-1 py-0.5 rounded">rowspan</code> digunakan untuk memperluas cakupan satu sel secara <strong>VERTIKAL</strong> dari atas ke bawah melintasi dua atau lebih baris.
+                        </p>
+                        <div class="text-xs bg-white p-3 rounded border border-green-200 text-slate-600 space-y-1">
+                            <p><strong>Sintaks:</strong> <code class="text-green-600">&lt;td rowspan="jumlah_baris"&gt;</code></p>
+                            <p><strong>Efek:</strong> Mengisi nilai $M$ baris vertikal. Membutuhkan pengurangan 1 sel pada baris-baris berikutnya yang terkena dampak ekspansi sel ini.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-800 mt-8 mb-3">
+                    2. Fungsi Tag Utama Pembentuk Tabel
+                </h3>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm border-collapse border border-slate-200 rounded-lg">
+                        <thead class="bg-slate-100 text-slate-700 font-bold">
+                            <tr>
+                                <th class="p-3 border border-slate-200">Tag / Atribut</th>
+                                <th class="p-3 border border-slate-200">Nama Resmi</th>
+                                <th class="p-3 border border-slate-200">Fungsi Utama</th>
+                                <th class="p-3 border border-slate-200">Relevansi & Kasus Penggunaan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700">
+                            <tr>
+                                <td class="p-3 font-mono text-blue-600 font-bold border border-slate-200">&lt;table&gt;</td>
+                                <td class="p-3 border border-slate-200">Table Container</td>
+                                <td class="p-3 border border-slate-200">Elemen utama pembungkus seluruh struktur data tabel.</td>
+                                <td class="p-3 border border-slate-200">Wajib ada sebagai wadah. Mewadahi styling border, padding, dan layout.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-3 font-mono text-blue-600 font-bold border border-slate-200">&lt;tr&gt;</td>
+                                <td class="p-3 border border-slate-200">Table Row</td>
+                                <td class="p-3 border border-slate-200">Mendefinisikan satu baris horizontal data tabel.</td>
+                                <td class="p-3 border border-slate-200">Setiap data baru secara horizontal harus diletakkan dalam tag `<tr>`.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-mono text-blue-600 font-bold border border-slate-200">&lt;th&gt;</td>
+                                <td class="p-3 border border-slate-200">Table Header</td>
+                                <td class="p-3 border border-slate-200">Sel judul baris/kolom dengan gaya teks tebal (bold) & rata tengah secara otomatis.</td>
+                                <td class="p-3 border border-slate-200">Digunakan pada bagian header (`<thead>`) untuk label judul kolom/kategori.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-3 font-mono text-blue-600 font-bold border border-slate-200">&lt;td&gt;</td>
+                                <td class="p-3 border border-slate-200">Table Data</td>
+                                <td class="p-3 border border-slate-200">Sel penampung isi/nilai data standar dalam tabel.</td>
+                                <td class="p-3 border border-slate-200">Digunakan di bagian badan tabel (`<tbody>`) untuk menampilkan informasi aktual.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-mono text-indigo-600 font-bold border border-slate-200">colspan="N"</td>
+                                <td class="p-3 border border-slate-200">Column Span Attribute</td>
+                                <td class="p-3 border border-slate-200">Menggabungkan $N$ kolom horizontal menjadi 1 sel besar.</td>
+                                <td class="p-3 border border-slate-200">Membuat judul sub-kategori, baris total/subtotal di bagian bawah tabel.</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-3 font-mono text-indigo-600 font-bold border border-slate-200">rowspan="M"</td>
+                                <td class="p-3 border border-slate-200">Row Span Attribute</td>
+                                <td class="p-3 border border-slate-200">Menggabungkan $M$ baris vertikal menjadi 1 sel besar.</td>
+                                <td class="p-3 border border-slate-200">Pengelompokan data kategorikal (misal: Nama Hari dalam Jadwal Pelajaran).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Golden Rules Box -->
+                <div class="bg-amber-50 border border-amber-300 rounded-xl p-5">
+                    <h4 class="font-bold text-amber-900 text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Aturan Emas Matematika Sel Tabel (Golden Rules)
+                    </h4>
+                    <p class="text-sm text-amber-800 leading-relaxed mb-3">
+                        Agar tabel tidak pecah / berantakan (off-grid), Anda harus menjaga total "bobot sel" pada setiap baris agar selalu konstan!
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 text-xs font-mono bg-white p-4 rounded-lg border border-amber-200">
+                        <div>
+                            <p class="font-bold text-slate-800 border-b pb-1 mb-1">Rumus Keseimbangan Baris (Colspan):</p>
+                            <p class="text-indigo-700">Total Kolom = $\sum (\text{Colspan Sel}) + \text{Sel Normal}$</p>
+                            <p class="text-slate-500 mt-1 italic">Jika Baris 1 punya 3 kolom normal + 1 sel (colspan="2"), total kapasitas grid = 5 kolom.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 border-b pb-1 mb-1">Rumus Keseimbangan Vertikal (Rowspan):</p>
+                            <p class="text-green-700">Baris-$K$ Terpengaruh = $\text{Jumlah Sel Asli} - \text{Sel Impansi Rowspan}$</p>
+                            <p class="text-slate-500 mt-1 italic">Baris di bawah sel rowspan HARUS mengurangi jumlah tag `<td>` sebanyak sel yang terinvasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: CONTOH PENGERJAAN SPASIAL -->
+        <section id="tab2" class="tab-content hidden space-y-8">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+                <h2 class="text-2xl font-bold text-slate-900 border-b pb-4 mb-6">
+                    2. Contoh Pengerjaan Spasial Masing-Masing Atribut
+                </h2>
+
+                <!-- Kasus 1: COLSPAN -->
+                <div class="space-y-4 mb-10">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-blue-600 text-white font-bold text-xs px-3 py-1 rounded">Kasus A</span>
+                        <h3 class="text-xl font-bold text-slate-800">Penggabungan Kolom Horizontal (`colspan`)</h3>
+                    </div>
+                    <p class="text-sm text-slate-600">
+                        Skenario: Kita ingin membuat tabel berukuran 3 kolom, namun pada baris pertama terdapat sel judul yang menggabungkan 2 kolom pertama, dan baris ketiga memiliki baris "TOTAL" yang menggabungkan 3 kolom sekaligus.
+                    </p>
+
+                    <div class="grid lg:grid-cols-2 gap-6 items-start">
+                        <!-- Code Box -->
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl shadow font-mono text-xs overflow-x-auto">
+                            <div class="text-slate-400 text-xs mb-2 border-b border-slate-800 pb-1 flex justify-between">
+                                <span>HTML Source Code</span>
+                                <span class="text-blue-400">colspan_demo.html</span>
+                            </div>
+<pre><code>&lt;table border="1" cellpading="8"&gt;
+  &lt;tr&gt;
+    &lt;!-- Menggabungkan Kolom 1 & 2 --&gt;
+    &lt;th <span class="text-blue-400 font-bold">colspan="2"</span>&gt;Nilai Ujian&lt;/th&gt;
+    &lt;th&gt;Keterangan&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Teori: 85&lt;/td&gt;
+    &lt;td&gt;Praktik: 90&lt;/td&gt;
+    &lt;td&gt;Lulus&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;!-- Menggabungkan 3 Kolom sekaligus --&gt;
+    &lt;td <span class="text-blue-400 font-bold">colspan="3"</span> align="center"&gt;
+      &lt;b&gt;Rata-rata Akhir: 87.5&lt;/b&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                        </div>
+
+                        <!-- Visual Breakdown & Result -->
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Hasil Render Visual:</h4>
+                                <table class="w-full text-center border-collapse border-2 border-slate-400 text-sm bg-white">
+                                    <thead>
+                                        <tr class="bg-blue-100">
+                                            <th colspan="2" class="border-2 border-slate-400 p-3 text-blue-900 font-bold">Nilai Ujian (colspan="2")</th>
+                                            <th class="border-2 border-slate-400 p-3">Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border-2 border-slate-400 p-2">Teori: 85</td>
+                                            <td class="border-2 border-slate-400 p-2">Praktik: 90</td>
+                                            <td class="border-2 border-slate-400 p-2">Lulus</td>
+                                        </tr>
+                                        <tr class="bg-blue-50">
+                                            <td colspan="3" class="border-2 border-slate-400 p-2 font-bold text-blue-950">
+                                                Rata-rata Akhir: 87.5 (colspan="3")
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bg-blue-50/50 p-3 rounded-lg border border-blue-200 text-xs text-blue-900">
+                                <p><strong><i class="fa-solid fa-lightbulb text-amber-500"></i> Analisis Struktur:</strong> Pada baris 1, `colspan="2"` menempati posisi Kolom 1 & 2. Oleh karena itu, kita hanya menambah 1 tag `<th>` lagi untuk Kolom 3 (Total = 2 + 1 = 3 kolom).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Kasus 2: ROWSPAN -->
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-green-600 text-white font-bold text-xs px-3 py-1 rounded">Kasus B</span>
+                        <h3 class="text-xl font-bold text-slate-800">Penggabungan Baris Vertikal (`rowspan`)</h3>
+                    </div>
+                    <p class="text-sm text-slate-600">
+                        Skenario: Kita ingin membuat daftar siswa di mana kategori jurusan "Teknik Informatika" mencakup 2 baris siswa sekaligus secara vertikal.
+                    </p>
+
+                    <div class="grid lg:grid-cols-2 gap-6 items-start">
+                        <!-- Code Box -->
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl shadow font-mono text-xs overflow-x-auto">
+                            <div class="text-slate-400 text-xs mb-2 border-b border-slate-800 pb-1 flex justify-between">
+                                <span>HTML Source Code</span>
+                                <span class="text-green-400">rowspan_demo.html</span>
+                            </div>
+<pre><code>&lt;table border="1" cellpadding="8"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Jurusan&lt;/th&gt;
+    &lt;th&gt;Nama Siswa&lt;/th&gt;
+    &lt;th&gt;Kelas&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;!-- Sel ini memakan 2 baris ke bawah --&gt;
+    &lt;td <span class="text-green-400 font-bold">rowspan="2"</span>&gt;Informatika&lt;/td&gt;
+    &lt;td&gt;Budi Santoso&lt;/td&gt;
+    &lt;td&gt;XI-A&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;!-- PERHATIKAN: Kolom 1 DITANAM oleh rowspan di atas! --&gt;
+    &lt;td&gt;Siti Aminah&lt;/td&gt;
+    &lt;td&gt;XI-B&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                        </div>
+
+                        <!-- Visual Breakdown & Result -->
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Hasil Render Visual:</h4>
+                                <table class="w-full text-center border-collapse border-2 border-slate-400 text-sm bg-white">
+                                    <thead>
+                                        <tr class="bg-slate-100">
+                                            <th class="border-2 border-slate-400 p-2">Jurusan</th>
+                                            <th class="border-2 border-slate-400 p-2">Nama Siswa</th>
+                                            <th class="border-2 border-slate-400 p-2">Kelas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="2" class="border-2 border-slate-400 p-3 bg-green-100 font-bold text-green-900">
+                                                Informatika<br><span class="text-[10px] font-normal text-green-700">(rowspan="2")</span>
+                                            </td>
+                                            <td class="border-2 border-slate-400 p-2">Budi Santoso</td>
+                                            <td class="border-2 border-slate-400 p-2">XI-A</td>
+                                        </tr>
+                                        <tr>
+                                            <!-- Notice only 2 TD here -->
+                                            <td class="border-2 border-slate-400 p-2">Siti Aminah</td>
+                                            <td class="border-2 border-slate-400 p-2">XI-B</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bg-green-50/50 p-3 rounded-lg border border-green-200 text-xs text-green-900">
+                                <p><strong><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Perhatian Penting:</strong> Pada baris ketiga (`<tr>` kedua data), hanya ada 2 buah tag `<td>` ("Siti Aminah" dan "XI-B"). Jika Anda menambah 3 buah `<td>`, sel akan terdorong ke kanan dan membuat tabel rusak!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: TABEL KOMPLEKS & HASIL INTERAKTIF -->
+        <section id="tab3" class="tab-content hidden space-y-8">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">
+                            3. Studi Kasus Kompleks: Rekapitulasi Nilai & Kombinasi Spasial
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Penggabungan `colspan` dan `rowspan` dalam satu tabel utuh profesional.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Interactive Controls -->
+                    <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl text-xs">
+                        <span class="font-bold text-slate-600 px-2">Sorotan Mode:</span>
+                        <button onclick="toggleHighlight('colspan')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 font-medium hover:bg-blue-50 text-blue-600 transition shadow-sm">
+                            <i class="fa-solid fa-arrows-left-right mr-1"></i> Highlight Colspan
+                        </button>
+                        <button onclick="toggleHighlight('rowspan')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 font-medium hover:bg-green-50 text-green-600 transition shadow-sm">
+                            <i class="fa-solid fa-arrows-up-down mr-1"></i> Highlight Rowspan
+                        </button>
+                        <button onclick="toggleHighlight('reset')" class="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 font-medium hover:bg-slate-300 transition">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Live Table Preview -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-eye text-indigo-600"></i> Preview Visual Interaktif:
+                        </h3>
+                        <span class="text-xs text-slate-500 italic">Klik tombol sorotan di atas untuk menganalisis sel!</span>
+                    </div>
+
+                    <div class="overflow-x-auto border border-slate-300 rounded-xl shadow-sm bg-white p-4">
+                        <table id="complex-demo-table" class="w-full border-collapse border-2 border-slate-400 text-sm text-center">
+                            <thead class="bg-slate-800 text-white">
+                                <tr>
+                                    <th rowspan="2" class="border border-slate-400 p-3 bg-slate-900 text-white font-bold" data-type="rowspan">
+                                        No
+                                    </th>
+                                    <th rowspan="2" class="border border-slate-400 p-3 bg-slate-900 text-white font-bold" data-type="rowspan">
+                                        Nama Siswa
+                                    </th>
+                                    <th colspan="3" class="border border-slate-400 p-2 bg-indigo-900 text-white font-bold" data-type="colspan">
+                                        Nilai Akademik
+                                    </th>
+                                    <th rowspan="2" class="border border-slate-400 p-3 bg-slate-900 text-white font-bold" data-type="rowspan">
+                                        Rata-Rata
+                                    </th>
+                                    <th rowspan="2" class="border border-slate-400 p-3 bg-slate-900 text-white font-bold" data-type="rowspan">
+                                        Status
+                                    </th>
+                                </tr>
+                                <tr class="bg-slate-700">
+                                    <th class="border border-slate-400 p-2 text-xs">Tugas</th>
+                                    <th class="border border-slate-400 p-2 text-xs">UTS</th>
+                                    <th class="border border-slate-400 p-2 text-xs">UAS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-300">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="border border-slate-300 p-2 font-mono">1</td>
+                                    <td class="border border-slate-300 p-2 font-semibold text-left">Ahmad Rizki</td>
+                                    <td class="border border-slate-300 p-2">85</td>
+                                    <td class="border border-slate-300 p-2">88</td>
+                                    <td class="border border-slate-300 p-2">90</td>
+                                    <td class="border border-slate-300 p-2 font-bold text-blue-600">87.6</td>
+                                    <td rowspan="2" class="border border-slate-300 p-2 bg-green-100 text-green-800 font-bold" data-type="rowspan">
+                                        LULUS<br><span class="text-[10px] font-normal text-green-600">(Kategori A)</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="border border-slate-300 p-2 font-mono">2</td>
+                                    <td class="border border-slate-300 p-2 font-semibold text-left">Dina Maria</td>
+                                    <td class="border border-slate-300 p-2">90</td>
+                                    <td class="border border-slate-300 p-2">82</td>
+                                    <td class="border border-slate-300 p-2">85</td>
+                                    <td class="border border-slate-300 p-2 font-bold text-blue-600">85.6</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="border border-slate-300 p-2 font-mono">3</td>
+                                    <td class="border border-slate-300 p-2 font-semibold text-left">Doni Pratama</td>
+                                    <td class="border border-slate-300 p-2">60</td>
+                                    <td class="border border-slate-300 p-2">55</td>
+                                    <td class="border border-slate-300 p-2">50</td>
+                                    <td class="border border-slate-300 p-2 font-bold text-red-600">55.0</td>
+                                    <td class="border border-slate-300 p-2 bg-red-100 text-red-800 font-bold">
+                                        REMEDIAL
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-slate-100 font-bold">
+                                <tr>
+                                    <td colspan="2" class="border border-slate-400 p-3 text-right bg-slate-200 text-slate-800" data-type="colspan">
+                                        Rata-Rata Keseluruhan Class:
+                                    </td>
+                                    <td colspan="3" class="border border-slate-400 p-3 text-center bg-indigo-50 text-indigo-900" data-type="colspan">
+                                        76.1
+                                    </td>
+                                    <td colspan="2" class="border border-slate-400 p-3 bg-amber-100 text-amber-900" data-type="colspan">
+                                        Predikat: BAIK
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Code Accordion / Display -->
+                <div class="space-y-2">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-code text-blue-600"></i> Kode HTML Lengkap Tabel Di Atas:
+                    </h3>
+                    <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs overflow-x-auto max-h-96">
+<pre><code>&lt;table border="1"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th <span class="text-green-400">rowspan="2"</span>&gt;No&lt;/th&gt;
+      &lt;th <span class="text-green-400">rowspan="2"</span>&gt;Nama Siswa&lt;/th&gt;
+      &lt;th <span class="text-blue-400">colspan="3"</span>&gt;Nilai Akademik&lt;/th&gt;
+      &lt;th <span class="text-green-400">rowspan="2"</span>&gt;Rata-Rata&lt;/th&gt;
+      &lt;th <span class="text-green-400">rowspan="2"</span>&gt;Status&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Tugas&lt;/th&gt;
+      &lt;th&gt;UTS&lt;/th&gt;
+      &lt;th&gt;UAS&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Ahmad Rizki&lt;/td&gt;
+      &lt;td&gt;85&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;
+      &lt;td&gt;87.6&lt;/td&gt;
+      &lt;td <span class="text-green-400">rowspan="2"</span>&gt;LULUS (Kategori A)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Dina Maria&lt;/td&gt;
+      &lt;td&gt;90&lt;/td&gt;&lt;td&gt;82&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;
+      &lt;td&gt;85.6&lt;/td&gt;
+      &lt;!-- Catatan: Sel Status dihilangkan di baris ini karena rowspan="2" dari atas --&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Doni Pratama&lt;/td&gt;
+      &lt;td&gt;60&lt;/td&gt;&lt;td&gt;55&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;
+      &lt;td&gt;55.0&lt;/td&gt;
+      &lt;td&gt;REMEDIAL&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td <span class="text-blue-400">colspan="2"</span>&gt;Rata-Rata Keseluruhan Class:&lt;/td&gt;
+      &lt;td <span class="text-blue-400">colspan="3"</span>&gt;76.1&lt;/td&gt;
+      &lt;td <span class="text-blue-400">colspan="2"</span>&gt;Predikat: BAIK&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: EVALUASI & STUDI KASUS -->
+        <section id="tab4" class="tab-content hidden space-y-8">
+            <!-- Part 1: Interactive Multiple Choice Quiz -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">
+                            4. Evaluasi Mandiri: 15 Soal Pilihan Ganda Interaktif
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Uji pemahaman Anda mengenai `colspan`, `rowspan`, dan anatomi tabel HTML.
+                        </p>
+                    </div>
+                    <div id="quiz-score-badge" class="hidden bg-blue-100 text-blue-800 px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-trophy text-amber-500"></i> Skor Anda: <span id="score-val">0</span> / 100
+                    </div>
+                </div>
+
+                <form id="quiz-form" class="space-y-6">
+                    <!-- Questions Container Dynamic -->
+                    <div id="questions-list" class="space-y-6"></div>
+
+                    <div class="pt-4 border-t flex flex-col md:flex-row gap-4 justify-between items-center">
+                        <button type="button" onclick="submitQuiz()" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Periksa Jawaban Saya
+                        </button>
+                        <button type="button" onclick="resetQuiz()" class="w-full md:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl transition">
+                            Reset Pilihan
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Part 2: Practical Student Assignment -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
+                <div class="border-b border-slate-700 pb-4 flex items-center justify-between">
+                    <h2 class="text-2xl font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code text-yellow-400"></i> Tugas Studi Kasus Praktik Murid (Project Based)
+                    </h2>
+                    <span class="bg-yellow-400/20 text-yellow-300 text-xs px-3 py-1 rounded-full border border-yellow-400/30 font-semibold">
+                        Tugas Individu / Kelompok
+                    </span>
+                </div>
+
+                <div class="space-y-4 text-sm text-slate-200">
+                    <h3 class="text-lg font-bold text-white">Judul Proyek: "Sistem Tabel Laporan Penjualan Toko Elektronik Interaktif"</h3>
+                    <p class="leading-relaxed">
+                        <strong>Deskripsi Tugas:</strong> Buatlah sebuah file HTML baru bernama <code class="bg-slate-800 text-yellow-300 px-2 py-0.5 rounded">laporan_penjualan.html</code> yang menampilkan struktur data laporan keuangan mingguan dengan kriteria wajib berikut:
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-4 my-4">
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h4 class="font-bold text-yellow-400 text-base">Spesifikasi Tabel Wajib:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-xs text-slate-300">
+                                <li>Memiliki <strong>Header Multi-Level</strong> menggunakan <code class="text-blue-300">colspan</code> dan <code class="text-green-300">rowspan</code>.</li>
+                                <li>Minimal memiliki 6 kolom: (No, Kategori, Nama Barang, Penjualan Hari [Senin-Rabu], Total Terjual).</li>
+                                <li>Setidaknya ada 2 Kategori Barang yang menggunakan <code class="text-green-300">rowspan="3"</code>.</li>
+                                <li>Menggunakan bagian <code class="text-purple-300">&lt;thead&gt;</code>, <code class="text-purple-300">&lt;tbody&gt;</code>, dan <code class="text-purple-300">&lt;tfoot&gt;</code> secara terstruktur.</li>
+                                <li>Baris total di <code class="text-purple-300">&lt;tfoot&gt;</code> menggunakan <code class="text-blue-300">colspan="3"</code> untuk label "GRAND TOTAL".</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 space-y-2">
+                            <h4 class="font-bold text-green-400 text-base">Rubrik Penilaian (Total 100 Poin):</h4>
+                            <ul class="space-y-1 text-xs text-slate-300">
+                                <li class="flex justify-between"><span>1. Kebenaran Sintaks Colspan & Rowspan:</span> <strong class="text-white">35 Poin</strong></li>
+                                <li class="flex justify-between"><span>2. Struktur Keseimbangan Grid (Tabel Rapi):</span> <strong class="text-white">25 Poin</strong></li>
+                                <li class="flex justify-between"><span>3. Kelengkapan Elemen Semantic Table:</span> <strong class="text-white">20 Poin</strong></li>
+                                <li class="flex justify-between"><span>4. Estetika CSS & Kerapihan Kode:</span> <strong class="text-white">20 Poin</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>Modul Interaktif Pemrograman Web HTML Table - Mengatur Modifikasi Baris & Kolom (`colspan` & `rowspan`).</p>
+            <p class="mt-1 text-slate-500">Dirancang untuk Durasi Pembelajaran 4 JP x 2 Pertemuan (360 Menit Total).</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript Logic -->
+    <script>
+        // Data 15 Soal Pilihan Ganda
+        const quizData = [
+            {
+                q: "1. Atribut HTML apa yang digunakan untuk menggabungkan dua atau lebih KOLOM secara horizontal dalam satu sel tabel?",
+                options: ["rowspan", "colspan", "cellspanning", "grid-column"],
+                answer: 1,
+                explain: "Atribut 'colspan' (Column Span) berfungsi memperluas sel secara horizontal melintasi beberapa kolom."
+            },
+            {
+                q: "2. Atribut HTML apa yang digunakan untuk menggabungkan dua atau lebih BARIS secara vertikal?",
+                options: ["colspan", "rowspan", "merge-row", "vspan"],
+                answer: 1,
+                explain: "Atribut 'rowspan' (Row Span) berfungsi memperluas sel secara vertikal melintasi beberapa baris."
+            },
+            {
+                q: "3. Pada elemen tabel HTML manakah atribut colspan dan rowspan dapat diterapkan?",
+                options: ["Hanya pada tag <table>", "Hanya pada tag <tr>", "Pada tag <td> dan <th>", "Hanya pada tag <tbody>"],
+                answer: 2,
+                explain: "Colspan dan rowspan adalah atribut khusus untuk sel data (<td>) atau sel header (<th>)."
+            },
+            {
+                q: "4. Jika sebuah sel diberi atribut <td colspan=\"3\">, apa yang terjadi pada sel tersebut?",
+                options: ["Membuat 3 baris baru di bawahnya", "Melebarkan sel setara dengan lebar 3 kolom normal", "Tabel otomatis terbagi menjadi 3 bagian", "Menghapus 3 kolom di sebelahnya"],
+                answer: 1,
+                explain: "colspan=\"3\" membuat sel tersebut memakan jatah ruang dari 3 kolom horizontal."
+            },
+            {
+                q: "5. Sebuah tabel memiliki 4 kolom. Jika pada baris pertama sel pertama menggunakan <td colspan=\"2\">, berapa sisa tag <td> yang harus ditambahkan pada baris tersebut?",
+                options: ["3 tag <td>", "2 tag <td>", "1 tag <td>", "Tidak perlu menambah <td> lagi"],
+                answer: 1,
+                explain: "Total kapasitas grid = 4 kolom. Sel pertama mengambil 2 kolom (colspan=2), maka sisa kolom yang dibutuhkan adalah 4 - 2 = 2 tag <td> lagi."
+            },
+            {
+                q: "6. Apa konsekuensi utama jika Anda menambahkan <td rowspan=\"2\"> di baris pertama tanpa mengurangi sel pada baris kedua?",
+                options: ["Tabel akan otomatis merapikan diri", "Sel pada baris kedua akan terdorong ke kanan dan tabel menjadi rusak/off-grid", "Kode HTML akan mengalami error dan tidak muncul di browser", "Baris kedua akan otomatis terhapus"],
+                answer: 1,
+                explain: "Ekspansi vertikal dari rowspan menempati posisi kolom di baris berikutnya. Jika sel di baris berikutnya tidak dikurangi, sel tersebut terdorong melebar ke kanan."
+            },
+            {
+                q: "7. Tag HTML yang secara default menghasilkan teks tebal (bold) dan berada di tengah (centered) untuk judul kolom adalah...",
+                options: ["<td>", "<tr>", "<th>", "<caption >"],
+                answer: 2,
+                explain: "Tag <th> (Table Header) memiliki styling standar berupa teks tebal (bold) dan posisi rata tengah."
+            },
+            {
+                q: "8. Manakah sintaks penulisan HTML yang BENAR untuk menggabungkan 3 baris secara vertikal?",
+                options: ["<td rowspan=\"3\">Isi Data</td>", "<td colspan=\"3\">Isi Data</td>", "<tr rowspan=\"3\">Isi Data</tr>", "<table rowspan=\"3\">Isi Data</table>"],
+                answer: 0,
+                explain: "Sintaks yang benar adalah <td rowspan=\"3\"> atau <th rowspan=\"3\">."
+            },
+            {
+                q: "9. Dalam sebuah tabel, apabila kita menuliskan <td colspan=\"2\" rowspan=\"2\">Data</td>, berapa total area sel normal yang tercakup oleh sel tersebut?",
+                options: ["2 sel", "3 sel", "4 sel", "6 sel"],
+                answer: 2,
+                explain: "Sel tersebut mencakup 2 kolom horizontal × 2 baris vertikal = 4 area sel normal."
+            },
+            {
+                q: "10. Elemen semantic HTML mana yang digunakan khusus untuk membungkus bagian header/judul tabel?",
+                options: ["<tbody>", "<tfoot>", "<thead>", "<header>"],
+                answer: 2,
+                explain: "<thead> digunakan untuk mengelompokkan konten header dalam tabel HTML."
+            },
+            {
+                q: "11. Pada pembuatan Jadwal Pelajaran Sekolah, jika Jam Ke-3 dan Ke-4 digabung untuk kegiatan 'Istirahat' secara horizontal melintasi seluruh kolom hari, atribut mana yang paling tepat?",
+                options: ["rowspan", "colspan", "cellpadding", "border"],
+                answer: 1,
+                explain: "Menggabungkan sel melintasi kolom hari secara horizontal membutuhkan 'colspan'."
+            },
+            {
+                q: "12. Apa fungsi dari bagian <tfoot> dalam struktur tabel HTML?",
+                options: ["Menampilkan judul paling atas tabel", "Membungkus baris rangkuman/total di bagian bawah tabel", "Membuat garis pembatas tabel", "Menyimpan data catatan kaki di luar tabel"],
+                answer: 1,
+                explain: "<tfoot> (Table Footer) digunakan untuk membungkus baris ringkasan, seperti total atau rata-rata di bawah tabel."
+            },
+            {
+                q: "13. Jika tabel memiliki 5 kolom horizontal, dan di baris footer kita ingin membuat sel 'TOTAL' dengan <td colspan=\"5\">, berapa tag <td> yang ada di baris footer tersebut?",
+                options: ["1 tag <td>", "5 tag <td>", "0 tag <td>", "10 tag <td>"],
+                answer: 0,
+                explain: "Karena 1 tag <td> tersebut sudah memiliki colspan=\"5\", ia telah memenuhi seluruh 5 kolom grid, sehingga hanya butuh 1 tag <td> saja."
+            },
+            {
+                q: "14. Di antara pilihan berikut, manakah skenario dilarang yang menyebabkan layout tabel berantakan?",
+                options: ["Menggunakan <th> di dalam <thead>", "Menjumlahkan total span melebihi jumlah kolom grid tanpa menyesuaikan sel lain", "Menggabungkan colspan dan rowspan pada satu sel <td>", "Menggunakan CSS border-collapse"],
+                answer: 1,
+                explain: "Jumlah span yang tidak seimbang dengan baris lain akan merusak struktur grid tabel."
+            },
+            {
+                q: "15. Apa keuntungan utama menggunakan atribut colspan dan rowspan dibanding membuat tabel terpisah?",
+                options: ["Membuat file HTML menjadi lebih berat", "Menjaga keteraturan visual data kompleks dalam satu kisi (grid) yang konsisten dan terstruktur", "Otomatis mengubah tabel menjadi animasi 3D", "Menghilangkan kebutuhan akan tag <tr>"],
+                answer: 1,
+                explain: "Atribut ini memungkinkan penyajian hubungan data kompleks dalam satu kesatuan kisi (grid) yang rapi dan teratur."
+            }
+        ];
+
+        // Function Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // Render Quiz Questions
+        function renderQuiz() {
+            const container = document.getElementById('questions-list');
+            container.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const qBox = document.createElement('div');
+                qBox.className = 'bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3';
+                
+                let optionsHtml = '';
+                q.options.forEach((opt, oIdx) => {
+                    optionsHtml += `
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:bg-blue-50/50 cursor-pointer transition text-sm">
+                            <input type="radio" name="q_${idx}" value="${oIdx}" class="w-4 h-4 text-blue-600">
+                            <span class="text-slate-700">${String.fromCharCode(65 + oIdx)}. ${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qBox.innerHTML = `
+                    <div class="font-bold text-slate-800 text-base flex justify-between items-start gap-2">
+                        <span>${q.q}</span>
+                        <span id="badge_${idx}" class="hidden text-xs px-2.5 py-1 rounded-full font-bold"></span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-2 mt-2">
+                        ${optionsHtml}
+                    </div>
+                    <div id="explain_${idx}" class="hidden p-3 rounded-lg bg-blue-50 border border-blue-200 text-xs text-blue-900 mt-2">
+                        <strong><i class="fa-solid fa-circle-info"></i> Pembahasan:</strong> ${q.explain}
+                    </div>
+                `;
+                container.appendChild(qBox);
+            });
+        }
+
+        // Submit Quiz Logic
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = quizData.length;
+
+            quizData.forEach((q, idx) => {
+                const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+                const badge = document.getElementById(`badge_${idx}`);
+                const explain = document.getElementById(`explain_${idx}`);
+
+                explain.classList.remove('hidden');
+                badge.classList.remove('hidden');
+
+                if (selected) {
+                    const userAns = parseInt(selected.value);
+                    if (userAns === q.answer) {
+                        score += 1;
+                        badge.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-green-100 text-green-700';
+                        badge.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Benar';
+                    } else {
+                        badge.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-red-100 text-red-700';
+                        badge.innerHTML = '<i class="fa-solid fa-xmark mr-1"></i> Salah';
+                    }
+                } else {
+                    badge.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-amber-100 text-amber-700';
+                    badge.innerHTML = '<i class="fa-solid fa-minus mr-1"></i> Belum Diisi';
+                }
+            });
+
+            const finalScore = Math.round((score / totalQuestions) * 100);
+            const scoreBadge = document.getElementById('quiz-score-badge');
+            const scoreVal = document.getElementById('score-val');
+
+            scoreBadge.classList.remove('hidden');
+            scoreVal.innerText = finalScore;
+
+            window.scrollTo({ top: document.getElementById('tab4').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        // Reset Quiz Logic
+        function resetQuiz() {
+            document.getElementById('quiz-form').reset();
+            quizData.forEach((_, idx) => {
+                document.getElementById(`badge_${idx}`).classList.add('hidden');
+                document.getElementById(`explain_${idx}`).classList.add('hidden');
+            });
+            document.getElementById('quiz-score-badge').classList.add('hidden');
+        }
+
+        // Interactive Highlight Logic for Tab 3
+        function toggleHighlight(type) {
+            const table = document.getElementById('complex-demo-table');
+            const cells = table.querySelectorAll('th, td');
+
+            cells.forEach(cell => {
+                cell.classList.remove('highlight-colspan', 'highlight-rowspan');
+                const cellType = cell.getAttribute('data-type');
+
+                if (type === 'colspan' && cellType === 'colspan') {
+                    cell.classList.add('highlight-colspan');
+                } else if (type === 'rowspan' && cellType === 'rowspan') {
+                    cell.classList.add('highlight-rowspan');
+                }
+            });
+        }
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
